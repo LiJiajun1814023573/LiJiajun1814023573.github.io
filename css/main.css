@@ -1175,7 +1175,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #1b0ad7;
+  background: #de75f6;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2297,19 +2297,20 @@ embed {
 }
 .custom-logo .site-meta-headline {
   text-align: center;
+  vertical-align: center;
 }
 .custom-logo .site-title {
-  color: #222;
+  color: #00e079;
   margin: 10px auto 0;
 }
 .custom-logo .site-title a {
   border: 0;
 }
 .custom-logo-image {
-  background: #fff;
+  background: #000;
   margin: 0 auto;
   max-width: 150px;
-  padding: 5px;
+  padding: 3px;
   border-radius: 50%;
   transition: 2.5s all;
 }
@@ -2317,7 +2318,11 @@ embed {
   transform: rotate(360deg);
 }
 .brand {
-  background: var(--btn-default-bg);
+  background: #fff;
+  border: 2px solid #000;
+  box-shadow: 5px 5px 5px #00e079;
+  border-radius: 7px;
+  vertical-align: center;
 }
 @media (max-width: 767px) {
   .site-nav {
