@@ -1175,7 +1175,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff4d4b;
+  background: #1b0ad7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2310,6 +2310,11 @@ embed {
   margin: 0 auto;
   max-width: 150px;
   padding: 5px;
+  border-radius: 50%;
+  transition: 2.5s all;
+}
+.custom-logo-image:hover {
+  transform: rotate(360deg);
 }
 .brand {
   background: var(--btn-default-bg);
