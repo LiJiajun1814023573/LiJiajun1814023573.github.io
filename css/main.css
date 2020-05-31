@@ -177,7 +177,7 @@ body {
 body {
   background: var(--body-bg-color);
   color: var(--text-color);
-  font-family: 'Zhi Mang Xing', FangSong, KaiTi, "Microsoft YaHei", sans-serif;
+  font-family: 'Zhi Mang Xing', "Zhi Mang Xing", KaiTi, "Microsoft YaHei", sans-serif;
   font-size: 1.4em;
   line-height: 2;
 }
@@ -193,7 +193,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Zhi Mang Xing', FangSong, KaiTi, "Microsoft YaHei", sans-serif;
+  font-family: 'Zhi Mang Xing', "Zhi Mang Xing", KaiTi, "Microsoft YaHei", sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 20px 0 15px;
@@ -391,7 +391,7 @@ pre {
 }
 pre,
 code {
-  font-family: consolas, Menlo, monospace, FangSong, KaiTi, "Microsoft YaHei";
+  font-family: consolas, Menlo, monospace, "Zhi Mang Xing", KaiTi, "Microsoft YaHei";
 }
 code {
   background: #eee;
@@ -985,7 +985,7 @@ pre .javascript .function {
   color: var(--brand-hover-color);
 }
 .site-title {
-  font-family: 'Zhi Mang Xing', FangSong, KaiTi, "Microsoft YaHei", sans-serif;
+  font-family: 'Zhi Mang Xing', "Zhi Mang Xing", KaiTi, "Microsoft YaHei", sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   margin: 0;
@@ -1175,7 +1175,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4eeeba;
+  background: #493ea4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1526,7 +1526,7 @@ pre .javascript .function {
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
 .post-body {
-  font-family: 'Zhi Mang Xing', FangSong, KaiTi, "Microsoft YaHei", sans-serif;
+  font-family: 'Zhi Mang Xing', "Zhi Mang Xing", KaiTi, "Microsoft YaHei", sans-serif;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -1824,7 +1824,7 @@ pre .javascript .function {
 }
 .posts-expand .post-meta {
   color: #999;
-  font-family: 'Zhi Mang Xing', FangSong, KaiTi, "Microsoft YaHei", sans-serif;
+  font-family: 'Zhi Mang Xing', "Zhi Mang Xing", KaiTi, "Microsoft YaHei", sans-serif;
   font-size: 0.75em;
   margin: 3px 0 60px 0;
   text-align: center;
