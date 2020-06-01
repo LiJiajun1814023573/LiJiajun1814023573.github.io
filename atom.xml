@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-31T06:58:59.976Z</updated>
+  <updated>2020-06-01T05:40:58.021Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,17 +21,31 @@
     <link href="http://yoursite.com/2020/05/31/javascript%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
     <id>http://yoursite.com/2020/05/31/javascript%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</id>
     <published>2020-05-31T06:47:24.000Z</published>
-    <updated>2020-05-31T06:58:59.976Z</updated>
+    <updated>2020-06-01T05:40:58.021Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;内存管理&quot;&gt;&lt;a href=&quot;#内存管理&quot; class=&quot;headerlink&quot; title=&quot;内存管理&quot;&gt;&lt;/a&gt;&lt;center&gt;内存管理&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;内存生命周期&quot;&gt;&lt;a href=&quot;#内存生命周期&quot;
-        
-      
+      &lt;h1 id=&quot;内存管理&quot;&gt;&lt;a href=&quot;#内存管理&quot; class=&quot;headerlink&quot; title=&quot;内存管理&quot;&gt;&lt;/a&gt;&lt;center&gt;内存管理&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;内存生命周期&quot;&gt;&lt;a href=&quot;#内存生命周期&quot; class=&quot;headerlink&quot; title=&quot;内存生命周期&quot;&gt;&lt;/a&gt;内存生命周期&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;分配你所需要的内存&lt;/li&gt;
+&lt;li&gt;使用分配到的内存读写&lt;/li&gt;
+&lt;li&gt;不需要时将其释放\归还&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;javascript的内存分配&quot;&gt;&lt;a href=&quot;#javascript的内存分配&quot; class=&quot;headerlink&quot; title=&quot;javascript的内存分配&quot;&gt;&lt;/a&gt;javascript的内存分配&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;值初始化&lt;/li&gt;
+&lt;li&gt;函数调用&lt;/li&gt;
+&lt;li&gt;使用值&lt;ul&gt;
+&lt;li&gt;对分配内存进行读取和写入的操作，读取和写入可能是写入一个变量或者一个对象的属性值，传递函数参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不需要时释放&lt;ul&gt;
+&lt;li&gt;垃圾回收器跟踪内存分配和使用，当分配内存不使用时自动释放．近似过程，无法判定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;垃圾回收&quot;&gt;&lt;a href=&quot;#垃圾回收&quot; class=&quot;headerlink&quot; title=&quot;垃圾回收&quot;&gt;&lt;/a&gt;垃圾回收&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;引用&lt;ul&gt;
+&lt;li&gt;在内存管理的environment中，一个对象如果有访问另一个对象的权限，就叫一个对象引用另一个对象．对象对它原型的引用(隐式引用)，对它属性的引用(显式引用)．&lt;/li&gt;
+&lt;li&gt;对象包括函数作用域(全局词法作用域)
     
     </summary>
     

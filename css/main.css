@@ -961,8 +961,8 @@ pre .javascript .function {
   padding: 0 10px;
 }
 .headband {
-  background: #222;
-  height: 3px;
+  background: linear-gradient(to right, #3eede7, #c9dd22);
+  height: 5px;
 }
 .site-meta {
   flex-grow: 1;
@@ -1175,7 +1175,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a6dd01;
+  background: #f2a742;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1977,7 +1977,7 @@ pre .javascript .function {
   text-align: center;
 }
 #qr > div:hover p {
-  animation: roll 0.1s infinite linear;
+  animation: roll 2.5s infinite linear alternate;
 }
 @-moz-keyframes roll {
   from {
