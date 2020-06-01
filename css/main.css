@@ -1181,7 +1181,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #d6ff7e;
+  background: #091db3;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2466,13 +2466,13 @@ embed {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.site-overview {
-  text-align: center;
-}
-canvas#canvas {
-  margin-top: 20px;
-}
 * {
   cursor: url("https://LiJiajun1814023573.github.io/1.ico");
 auto
+}
+.site-overview {
+  text-align: center;
+}
+#canvas {
+  margin-top: 20px;
 }
