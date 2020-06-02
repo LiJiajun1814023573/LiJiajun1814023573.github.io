@@ -40,15 +40,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="事件循环EventLoop(一)运行时概念栈 函数调用形成若干帧组成栈堆 对于js，对象处于堆中(非结构化的内存区域)队列 js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息． 在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，作为参数来调用与之关联的函数，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相">
+  <meta name="description" content="EventLoop(一)运行时概念栈 函数调用形成若干帧组成栈 堆 对于js，对象处于堆中(非结构化的内存区域) 队列 js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．  在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，作为参数来调用与之关联的函数，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联">
 <meta property="og:type" content="article">
-<meta property="og:title" content="事件循环EventLoop">
+<meta property="og:title" content="事件循环EventLoop(一)">
 <meta property="og:url" content="http://yoursite.com/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/index.html">
 <meta property="og:site_name" content="青山入我怀">
-<meta property="og:description" content="事件循环EventLoop(一)运行时概念栈 函数调用形成若干帧组成栈堆 对于js，对象处于堆中(非结构化的内存区域)队列 js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息． 在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，作为参数来调用与之关联的函数，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相">
+<meta property="og:description" content="EventLoop(一)运行时概念栈 函数调用形成若干帧组成栈 堆 对于js，对象处于堆中(非结构化的内存区域) 队列 js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．  在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，作为参数来调用与之关联的函数，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-02T15:15:42.000Z">
-<meta property="article:modified_time" content="2020-06-02T15:54:06.870Z">
+<meta property="article:modified_time" content="2020-06-02T16:17:30.538Z">
 <meta property="article:author" content="不还">
 <meta property="article:tag" content="javascript">
 <meta name="twitter:card" content="summary">
@@ -66,7 +66,7 @@
   };
 </script>
 
-  <title>事件循环EventLoop | 青山入我怀</title>
+  <title>事件循环EventLoop(一) | 青山入我怀</title>
   
 
 
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          事件循环EventLoop
+          事件循环EventLoop(一)
         </h1>
 
         <div class="post-meta">
@@ -237,10 +237,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-06-02 23:15:42 / Modified: 23:54:06" itemprop="dateCreated datePublished" datetime="2020-06-02T23:15:42+08:00">2020-06-02</time>
+              <time title="Created: 2020-06-02 23:15:42" itemprop="dateCreated datePublished" datetime="2020-06-02T23:15:42+08:00">2020-06-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-03 00:17:30" itemprop="dateModified" datetime="2020-06-03T00:17:30+08:00">2020-06-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -262,26 +268,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="事件循环EventLoop-一"><a href="#事件循环EventLoop-一" class="headerlink" title="事件循环EventLoop(一)"></a>事件循环EventLoop(一)</h1><h2 id="运行时概念"><a href="#运行时概念" class="headerlink" title="运行时概念"></a>运行时概念</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ul>
-<li>函数调用形成若干帧组成栈<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3></li>
-<li>对于js，对象处于堆中(非结构化的内存区域)<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3></li>
-<li>js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．</li>
-<li>在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，<red>作为参数来调用与之关联的函数</red>，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联系的关系．</li>
-<li>函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)<h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2></li>
-</ul>
+        <h1 id="EventLoop-一"><a href="#EventLoop-一" class="headerlink" title="EventLoop(一)"></a><center><span style="color:grey">EventLoop(一)</span></center></h1><h2 id="运行时概念"><a href="#运行时概念" class="headerlink" title="运行时概念"></a><span style="color:#00e079">运行时概念</span></h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ul>
+<li><p>函数调用形成若干帧组成栈</p>
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3></li>
+<li><p>对于js，对象处于堆中(非结构化的内存区域)</p>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3></li>
+<li><p>js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．</p>
+</li>
+<li><p>在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，<span style="color:red">作为参数来调用与之关联的函数</span>，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联系的关系．</p>
+</li>
+<li><p>函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)</p>
+<h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a><span style="color:#00e079">事件循环</span></h2><a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while (queue.waitForMessage()) &#123;</span><br><span class="line">  queue.processNextMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>类似于如此调用</p>
-<h3 id="执行至完成"><a href="#执行至完成" class="headerlink" title="执行至完成"></a>执行至完成</h3><ul>
-<li>每个消息完整的执行后，执行其它消息</li>
-<li>　它当一个函数在执行时，不会被抢占，同时只有在它运行结束之后才能运行其它代码，这与C语言不同，如如果函数在线程中运行，可以在任何地方被终止,然后在另一个线程中运行其它代码．</li>
-<li>缺点在于当一个消息占用太多时间来处理时，web应用会无法处理与用户的交互，<br>因此需要减少单独处理时间，或是分割处理多个子消息．</li>
-</ul>
-<h3 id="添加消息"><a href="#添加消息" class="headerlink" title="添加消息"></a>添加消息</h3><ul>
-<li>事件发生并且有事件监听器绑定在该事件上时，会把一个消息添加到消息队列．无事件监听器，消息会消失</li>
-<li>例如一个点击事件处理器的元素被点击，会像其它事件一样产生一个类似的消息．</li>
-<li>setTimeOut实际上就包含了两个参数，第一个参数是消息，所以第二个参数反应的延迟时间不一定是真实的，而是要看消息队列中有没有正在处理的消息，若有，则需要等待处理完毕，然后会将消息添加到消息队列．</li>
-<li>如果队列无消息并且栈也为空，则这段延迟过后，会马上处理消息．<h2 id="永不阻塞"><a href="#永不阻塞" class="headerlink" title="永不阻塞"></a>永不阻塞</h2></li>
-<li>js事件循环模型使得与其他语言不同，它永不阻塞．处理I/O通常通过事件和回调来执行．<br>所以当一个应用正等待一个 IndexedDB 查询返回或者一个 XHR 请求返回时，它仍然可以处理其它事情，比如用户输入。</li>
+<h3 id="执行至完成"><a href="#执行至完成" class="headerlink" title="执行至完成"></a>执行至完成</h3></li>
+<li><p>每个消息完整的执行后，执行其它消息</p>
+</li>
+<li><p>　它当一个函数在执行时，不会被抢占，同时只有在它运行结束之后才能运行其它代码，这与C语言不同，如如果函数在线程中运行，可以在任何地方被终止,然后在另一个线程中运行其它代码．</p>
+</li>
+<li><p>缺点在于当一个消息占用太多时间来处理时，web应用会无法处理与用户的交互，<br>因此需要减少单独处理时间，或是分割处理多个子消息．</p>
+<h3 id="添加消息"><a href="#添加消息" class="headerlink" title="添加消息"></a>添加消息</h3></li>
+<li><p>事件发生并且有事件监听器绑定在该事件上时，会把一个消息添加到消息队列．无事件监听器，消息会消失</p>
+</li>
+<li><p>例如一个点击事件处理器的元素被点击，会像其它事件一样产生一个类似的消息．</p>
+</li>
+<li><p>setTimeOut实际上就包含了两个参数，第一个参数是消息，所以第二个参数反应的延迟时间不一定是真实的，而是要看消息队列中有没有正在处理的消息，若有，则需要等待处理完毕，然后会将消息添加到消息队列．</p>
+</li>
+<li><p>如果队列无消息并且栈也为空，则这段延迟过后，会马上处理消息．</p>
+<h2 id="永不阻塞"><a href="#永不阻塞" class="headerlink" title="永不阻塞"></a><span style="color:#00e079">永不阻塞</span></h2></li>
+<li><p>js事件循环模型使得与其他语言不同，它永不阻塞．处理I/O通常通过事件和回调来执行．<br>所以当一个应用正等待一个 IndexedDB 查询返回或者一个 XHR 请求返回时，它仍然可以处理其它事情，比如用户输入。</p>
+</li>
 </ul>
 
     </div>
@@ -378,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事件循环EventLoop-一"><span class="nav-number">1.</span> <span class="nav-text">事件循环EventLoop(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时概念"><span class="nav-number">1.1.</span> <span class="nav-text">运行时概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">1.1.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆"><span class="nav-number">1.1.2.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">1.1.3.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">1.2.</span> <span class="nav-text">事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行至完成"><span class="nav-number">1.2.1.</span> <span class="nav-text">执行至完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加消息"><span class="nav-number">1.2.2.</span> <span class="nav-text">添加消息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#永不阻塞"><span class="nav-number">1.3.</span> <span class="nav-text">永不阻塞</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#EventLoop-一"><span class="nav-number">1.</span> <span class="nav-text">EventLoop(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时概念"><span class="nav-number">1.1.</span> <span class="nav-text">运行时概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">1.1.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆"><span class="nav-number">1.1.2.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">1.1.3.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件循环"><span class="nav-number">1.2.</span> <span class="nav-text">事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行至完成"><span class="nav-number">1.2.1.</span> <span class="nav-text">执行至完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加消息"><span class="nav-number">1.2.2.</span> <span class="nav-text">添加消息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#永不阻塞"><span class="nav-number">1.3.</span> <span class="nav-text">永不阻塞</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -395,7 +411,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -476,7 +492,7 @@
   </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1.2k字</span>
+  <span class="post-count">博客全站共1.1k字</span>
 </div>
         
 

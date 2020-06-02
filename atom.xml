@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-02T15:54:06.870Z</updated>
+  <updated>2020-06-02T16:17:30.538Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,21 +17,25 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>事件循环EventLoop</title>
+    <title>事件循环EventLoop(一)</title>
     <link href="http://yoursite.com/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/"/>
     <id>http://yoursite.com/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/</id>
     <published>2020-06-02T15:15:42.000Z</published>
-    <updated>2020-06-02T15:54:06.870Z</updated>
+    <updated>2020-06-02T16:17:30.538Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h1 id=&quot;事件循环EventLoop-一&quot;&gt;&lt;a href=&quot;#事件循环EventLoop-一&quot; class=&quot;headerlink&quot; title=&quot;事件循环EventLoop(一)&quot;&gt;&lt;/a&gt;事件循环EventLoop(一)&lt;/h1&gt;&lt;h2 id=&quot;运行时概念&quot;&gt;&lt;a
-        
-      
+      &lt;h1 id=&quot;EventLoop-一&quot;&gt;&lt;a href=&quot;#EventLoop-一&quot; class=&quot;headerlink&quot; title=&quot;EventLoop(一)&quot;&gt;&lt;/a&gt;&lt;center&gt;&lt;span style=&quot;color:grey&quot;&gt;EventLoop(一)&lt;/span&gt;&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;运行时概念&quot;&gt;&lt;a href=&quot;#运行时概念&quot; class=&quot;headerlink&quot; title=&quot;运行时概念&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;运行时概念&lt;/span&gt;&lt;/h2&gt;&lt;h3 id=&quot;栈&quot;&gt;&lt;a href=&quot;#栈&quot; class=&quot;headerlink&quot; title=&quot;栈&quot;&gt;&lt;/a&gt;栈&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;函数调用形成若干帧组成栈&lt;/p&gt;
+&lt;h3 id=&quot;堆&quot;&gt;&lt;a href=&quot;#堆&quot; class=&quot;headerlink&quot; title=&quot;堆&quot;&gt;&lt;/a&gt;堆&lt;/h3&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;对于js，对象处于堆中(非结构化的内存区域)&lt;/p&gt;
+&lt;h3 id=&quot;队列&quot;&gt;&lt;a href=&quot;#队列&quot; class=&quot;headerlink&quot; title=&quot;队列&quot;&gt;&lt;/a&gt;队列&lt;/h3&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，&lt;span style=&quot;color:red&quot;&gt;作为参数来调用与之关联的函数&lt;/span&gt;，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联系的关系．&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)&lt;/p&gt;
+&lt;h2 id=&quot;事件循环&quot;&gt;&lt;a href=&quot;#事件循环&quot; class=&quot;headerlink&quot; title=&quot;事件循环&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;事件循环&lt;/span&gt;&lt;/h2&gt;
     
     </summary>
     
@@ -48,16 +52,16 @@
     <link href="http://yoursite.com/2020/05/31/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
     <id>http://yoursite.com/2020/05/31/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</id>
     <published>2020-05-31T06:47:24.000Z</published>
-    <updated>2020-06-02T15:16:52.909Z</updated>
+    <updated>2020-06-02T16:17:58.682Z</updated>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;内存管理&quot;&gt;&lt;a href=&quot;#内存管理&quot; class=&quot;headerlink&quot; title=&quot;内存管理&quot;&gt;&lt;/a&gt;&lt;center&gt;内存管理&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;内存生命周期&quot;&gt;&lt;a href=&quot;#内存生命周期&quot; class=&quot;headerlink&quot; title=&quot;内存生命周期&quot;&gt;&lt;/a&gt;内存生命周期&lt;/h2&gt;&lt;ul&gt;
+      &lt;h1 id=&quot;内存管理&quot;&gt;&lt;a href=&quot;#内存管理&quot; class=&quot;headerlink&quot; title=&quot;内存管理&quot;&gt;&lt;/a&gt;&lt;center&gt;&lt;span style=&quot;color:grey&quot;&gt;内存管理&lt;/span&gt;&lt;/center&gt;&lt;/h1&gt;&lt;h2 id=&quot;内存生命周期&quot;&gt;&lt;a href=&quot;#内存生命周期&quot; class=&quot;headerlink&quot; title=&quot;内存生命周期&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;内存生命周期&lt;/span&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;分配你所需要的内存&lt;/li&gt;
 &lt;li&gt;使用分配到的内存读写&lt;/li&gt;
 &lt;li&gt;不需要时将其释放\归还&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;javascript的内存分配&quot;&gt;&lt;a href=&quot;#javascript的内存分配&quot; class=&quot;headerlink&quot; title=&quot;javascript的内存分配&quot;&gt;&lt;/a&gt;javascript的内存分配&lt;/h2&gt;&lt;ul&gt;
+&lt;h2 id=&quot;javascript的内存分配&quot;&gt;&lt;a href=&quot;#javascript的内存分配&quot; class=&quot;headerlink&quot; title=&quot;javascript的内存分配&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;javascript的内存分配&lt;/span&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;值初始化&lt;/li&gt;
 &lt;li&gt;函数调用&lt;/li&gt;
 &lt;li&gt;使用值&lt;ul&gt;
@@ -69,7 +73,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;垃圾回收&quot;&gt;&lt;a href=&quot;#垃圾回收&quot; class=&quot;headerlink&quot; title=&quot;垃圾回收&quot;&gt;&lt;/a&gt;垃圾回收&lt;/h2&gt;&lt;ul&gt;
+&lt;h2 id=&quot;垃圾回收&quot;&gt;&lt;a href=&quot;#垃圾回收&quot; class=&quot;headerlink&quot; title=&quot; 垃圾回收&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt; 垃圾回收&lt;/span&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;引用&lt;ul&gt;
 &lt;li&gt;在内存管理的environment中，一个对象如果有访问另一个对象的权限，就叫一个对象引用另一个对象．对象对它原型的引用(隐式引用)，对它属性的引用(显式引用)．&lt;/li&gt;
 &lt;li&gt;对象包括函数作用域(全局词法作用域)
@@ -81,29 +85,6 @@
     
     
       <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2020/05/31/hello-world/"/>
-    <id>http://yoursite.com/2020/05/31/hello-world/</id>
-    <published>2020-05-31T02:23:05.749Z</published>
-    <updated>2020-05-31T02:23:05.749Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
-        
-      
-    
-    </summary>
-    
-    
     
   </entry>
   
