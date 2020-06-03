@@ -1,16 +1,18 @@
+ //别忘了引入jq库
  var OriginTitle = document.title;
+console.log(OriginTitle)
  var titleTime;
  document.addEventListener('visibilitychange', function () {
      if (document.hidden) {
          $('[rel="icon"]').attr('href', "/images/funny.ico");
-         document.title = '╭(°A°`)╮ 页面崩溃啦 ~';
+         document.title = 'qwq人捏';
          clearTimeout(titleTime);
      }
      else {
          $('[rel="icon"]').attr('href', "/images/favicon.ico");
-         document.title = '(ฅ>ω<*ฅ) 噫又好了~' + OriginTitle;
+         document.title = '尔入我梦来' ;
          titleTime = setTimeout(function () {
              document.title = OriginTitle;
-         }, 2000);
+         }, 3000);
      }
  });
