@@ -40,15 +40,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="dart基础(一)采用dart与js对比差异的方式来进行学习． 基础数据类型 Number和String与js使用基本一致 Symbol的区别 js中，Symbol是将基础数据类型转换为唯一标识符，核心应用是将复杂引用数据类型转换为对象数据类型的键名．具体可参考js中Symbol,map,set  在 Dart 中，Symbol 是不透明的动态字符串名称，用于反映库中的元数据。用 Symbol 可">
+  <meta name="description" content="dart基础(一)由于近期有学习flutter的兴趣，因此首先学习其所需的编程语言dart.并采用dart与js对比差异的方式来进行学习． 基础数据类型 Number和String与js使用基本一致 Symbol的区别 js中，Symbol是将基础数据类型转换为唯一标识符，核心应用是将复杂引用数据类型转换为对象数据类型的键名．具体可参考js中Symbol,map,set  在 Dart 中，Sym">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dart基础(一)">
 <meta property="og:url" content="http://yoursite.com/2020/06/29/dart%E5%9F%BA%E7%A1%80(%E4%B8%80)/index.html">
 <meta property="og:site_name" content="青山入我怀">
-<meta property="og:description" content="dart基础(一)采用dart与js对比差异的方式来进行学习． 基础数据类型 Number和String与js使用基本一致 Symbol的区别 js中，Symbol是将基础数据类型转换为唯一标识符，核心应用是将复杂引用数据类型转换为对象数据类型的键名．具体可参考js中Symbol,map,set  在 Dart 中，Symbol 是不透明的动态字符串名称，用于反映库中的元数据。用 Symbol 可">
+<meta property="og:description" content="dart基础(一)由于近期有学习flutter的兴趣，因此首先学习其所需的编程语言dart.并采用dart与js对比差异的方式来进行学习． 基础数据类型 Number和String与js使用基本一致 Symbol的区别 js中，Symbol是将基础数据类型转换为唯一标识符，核心应用是将复杂引用数据类型转换为对象数据类型的键名．具体可参考js中Symbol,map,set  在 Dart 中，Sym">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-29T14:08:11.019Z">
-<meta property="article:modified_time" content="2020-06-29T14:41:50.840Z">
+<meta property="article:modified_time" content="2020-06-29T15:15:36.727Z">
 <meta property="article:author" content="不还">
 <meta property="article:tag" content="flutter">
 <meta property="article:tag" content="dart">
@@ -241,7 +241,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-06-29 22:08:11 / Modified: 22:41:50" itemprop="dateCreated datePublished" datetime="2020-06-29T22:08:11+08:00">2020-06-29</time>
+              <time title="Created: 2020-06-29 22:08:11 / Modified: 23:15:36" itemprop="dateCreated datePublished" datetime="2020-06-29T22:08:11+08:00">2020-06-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,7 +264,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="dart基础-一"><a href="#dart基础-一" class="headerlink" title="dart基础(一)"></a><center><span style="color:grey">dart基础(一)</span></center></h1><p>采用dart与js对比差异的方式来进行学习．</p>
+        <h1 id="dart基础-一"><a href="#dart基础-一" class="headerlink" title="dart基础(一)"></a><center><span style="color:grey">dart基础(一)</span></center></h1><p>由于近期有学习flutter的兴趣，因此首先学习其所需的编程语言dart.并采用dart与js对比差异的方式来进行学习．</p>
 <h2 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a><span style="color:#00e079">基础数据类型</span></h2><ul>
 <li><p>Number和String与js使用基本一致</p>
 <h3 id="Symbol的区别"><a href="#Symbol的区别" class="headerlink" title="Symbol的区别"></a>Symbol的区别</h3><ul>
@@ -273,6 +273,7 @@
 <li><p>在 Dart 中，Symbol 是不透明的动态字符串名称，用于反映库中的元数据。用 Symbol 可以获得或引用类的一个镜像，概念比较复杂，但其实和 JavaScript 的用法基本上是一致的。例如，下面代码首先 new 了一个 test 为 Map 数据类型，设置一个属性 #t（Symbol 类型），然后分别打印 test、test 的 #t、test 的 Symbol(“t”) 和 #t。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void main()</span><br><span class="line">&#123; Map test &#x3D; new Map(); </span><br><span class="line">  test[#t] &#x3D; &#39;symbol test&#39;; </span><br><span class="line">  print(test); </span><br><span class="line">  print(test[#t]); </span><br><span class="line">  print(test[Symbol(&#39;t&#39;)]); </span><br><span class="line">  print(#t);</span><br><span class="line">&#125;</span><br><span class="line">结果：</span><br><span class="line">flutter: &#123;Symbol(&quot;t&quot;): symbol test&#125; flutter: symbol test flutter: symbol test flutter: Symbol(&quot;t&quot;)</span><br></pre></td></tr></table></figure>
 <p>#t与Symbol(“t”)结果一致，由此可见，dart中的symbol更像是一个反射概念，而在js中是创建唯一标识的概念．</p>
+<a id="more"></a>
 <h3 id="undefined和null"><a href="#undefined和null" class="headerlink" title="undefined和null"></a>undefined和null</h3></li>
 </ul>
 </li>
@@ -291,7 +292,7 @@
 <li><p>dynamic也是动态数据类型，但数据类型调用异常时只会在运行时报错，不会在编译前和编译期间导致报错，所以这点很危险．</p>
 </li>
 </ul>
-<h2 id="基础运算符"><a href="#基础运算符" class="headerlink" title="基础运算符"></a><span style="color:#00e079">基础运算符</h2><ul>
+<h2 id="基础运算符"><a href="#基础运算符" class="headerlink" title="基础运算符"></a><span style="color:#00e079">基础运算符</span></h2><ul>
 <li>dart是强数据类型因此没有”===”运算符．同时有一些类型测试运算符和js中类型转换以及typeof相似．不加介绍．<h3 id="运算符"><a href="#运算符" class="headerlink" title="??运算符"></a>??运算符</h3></li>
 </ul>
 <ul>
@@ -307,6 +308,19 @@
 <ul>
 <li>需要设置私有属性，就在方法或者属性前添加’_’<h3 id="抽象类和泛型类"><a href="#抽象类和泛型类" class="headerlink" title="抽象类和泛型类"></a>抽象类和泛型类</h3></li>
 </ul>
+<h2 id="库与调用"><a href="#库与调用" class="headerlink" title="库与调用"></a><span style="color:#00e079">库与调用</span></h2><h3 id="dart库管理"><a href="#dart库管理" class="headerlink" title="dart库管理"></a>dart库管理</h3><ul>
+<li>库管理资源pub.dev中找到需要的库．在dart配置文件pubspec.yaml中添加就可以使用该库，就像在js的package.json中添加声明一样，也有dependencies和dev_dependencies<h3 id="开发dart库"><a href="#开发dart库" class="headerlink" title="开发dart库"></a>开发dart库</h3></li>
+</ul>
+<ul>
+<li>开发好的库发表在pub.dev就可以了，和npm管理一致．如何发布按照官网</li>
+<li>pubspec就像package一样，lib下，核心是对应的库文件.dart，是包含一个dart类，所以可以将私有方法用_保护，其他的可以被引用的模块调用．自己开发的无须发布在pub.dev的实现逻辑，可以放在src下．<h3 id="调用dart库．"><a href="#调用dart库．" class="headerlink" title="调用dart库．"></a>调用dart库．</h3></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#39;package:startup_namer&#x2F;pages&#x2F;homepage.dart&#39;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中package表示协议，比http好，避免性能影响，然后是库名/项目名，lib下的一个文件夹，具体引入的库文件名</li>
+<li>比相对路径的方式要好，建议采用package方式，保证项目代码一致性</li>
+</ul>
+<p>其中本篇文章提到的关于js中引用数据类型，以及前端工程化包括webpack,npm script会在后续整理后出相关文章．</p>
 
     </div>
 
@@ -403,7 +417,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dart基础-一"><span class="nav-number">1.</span> <span class="nav-text">dart基础(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">基础数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol的区别"><span class="nav-number">1.1.1.</span> <span class="nav-text">Symbol的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined和null"><span class="nav-number">1.1.2.</span> <span class="nav-text">undefined和null</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map和List"><span class="nav-number">1.1.3.</span> <span class="nav-text">Map和List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弱类型-var-object及dynamic"><span class="nav-number">1.1.4.</span> <span class="nav-text">弱类型-var,object及dynamic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础运算符"><span class="nav-number">1.2.</span> <span class="nav-text">基础运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">??运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#级联操作"><span class="nav-number">1.2.2.</span> <span class="nav-text">级联操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">1.4.</span> <span class="nav-text"> 类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名构造函数"><span class="nav-number">1.4.1.</span> <span class="nav-text">命名构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制"><span class="nav-number">1.4.2.</span> <span class="nav-text">访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象类和泛型类"><span class="nav-number">1.4.3.</span> <span class="nav-text">抽象类和泛型类</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dart基础-一"><span class="nav-number">1.</span> <span class="nav-text">dart基础(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">基础数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol的区别"><span class="nav-number">1.1.1.</span> <span class="nav-text">Symbol的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined和null"><span class="nav-number">1.1.2.</span> <span class="nav-text">undefined和null</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map和List"><span class="nav-number">1.1.3.</span> <span class="nav-text">Map和List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弱类型-var-object及dynamic"><span class="nav-number">1.1.4.</span> <span class="nav-text">弱类型-var,object及dynamic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础运算符"><span class="nav-number">1.2.</span> <span class="nav-text">基础运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">??运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#级联操作"><span class="nav-number">1.2.2.</span> <span class="nav-text">级联操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">1.4.</span> <span class="nav-text"> 类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名构造函数"><span class="nav-number">1.4.1.</span> <span class="nav-text">命名构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制"><span class="nav-number">1.4.2.</span> <span class="nav-text">访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象类和泛型类"><span class="nav-number">1.4.3.</span> <span class="nav-text">抽象类和泛型类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#库与调用"><span class="nav-number">1.5.</span> <span class="nav-text">库与调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dart库管理"><span class="nav-number">1.5.1.</span> <span class="nav-text">dart库管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发dart库"><span class="nav-number">1.5.2.</span> <span class="nav-text">开发dart库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用dart库．"><span class="nav-number">1.5.3.</span> <span class="nav-text">调用dart库．</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -501,7 +515,7 @@
   </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共2k字</span>
+  <span class="post-count">博客全站共2.4k字</span>
 </div>
         
 
