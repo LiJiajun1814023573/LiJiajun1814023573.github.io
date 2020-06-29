@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>dart基础(一)</title>
+    <url>/2020/06/29/dart%E5%9F%BA%E7%A1%80(%E4%B8%80)/</url>
+    <content><![CDATA[<h1 id="dart基础-一"><a href="#dart基础-一" class="headerlink" title="dart基础(一)"></a><center><span style="color:grey">dart基础(一)</span></center></h1><p>采用dart与js对比差异的方式来进行学习．</p>
+<h2 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a><span style="color:#00e079">基础数据类型</span></h2><ul>
+<li><p>Number和String与js使用基本一致</p>
+<h3 id="Symbol的区别"><a href="#Symbol的区别" class="headerlink" title="Symbol的区别"></a>Symbol的区别</h3><ul>
+<li><p>js中，Symbol是将基础数据类型转换为唯一标识符，核心应用是将复杂引用数据类型转换为对象数据类型的键名．具体可参考<a href="https://www.jianshu.com/p/4da037782be9" target="_blank" rel="noopener">js中Symbol,map,set</a></p>
+</li>
+<li><p>在 Dart 中，Symbol 是不透明的动态字符串名称，用于反映库中的元数据。用 Symbol 可以获得或引用类的一个镜像，概念比较复杂，但其实和 JavaScript 的用法基本上是一致的。例如，下面代码首先 new 了一个 test 为 Map 数据类型，设置一个属性 #t（Symbol 类型），然后分别打印 test、test 的 #t、test 的 Symbol(“t”) 和 #t。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void main()</span><br><span class="line">&#123; Map test &#x3D; new Map(); </span><br><span class="line">  test[#t] &#x3D; &#39;symbol test&#39;; </span><br><span class="line">  print(test); </span><br><span class="line">  print(test[#t]); </span><br><span class="line">  print(test[Symbol(&#39;t&#39;)]); </span><br><span class="line">  print(#t);</span><br><span class="line">&#125;</span><br><span class="line">结果：</span><br><span class="line">flutter: &#123;Symbol(&quot;t&quot;): symbol test&#125; flutter: symbol test flutter: symbol test flutter: Symbol(&quot;t&quot;)</span><br></pre></td></tr></table></figure>
+<p>#t与Symbol(“t”)结果一致，由此可见，dart中的symbol更像是一个反射概念，而在js中是创建唯一标识的概念．</p>
+<h3 id="undefined和null"><a href="#undefined和null" class="headerlink" title="undefined和null"></a>undefined和null</h3></li>
+</ul>
+</li>
+<li><p>dart与js不同，dart是静态脚本语言，所以如果没有定义一个变量无法通过编译，js是存在脚本在运行期间变量没定义的情况．</p>
+</li>
+<li><p>为了避免因为一个变量无法通过编译，dart中不采用undefined，而是使用null,dart中null是弱类型object的子类型，不是基础数据类型．而所有数据类型，被初始化后没有被赋值的话自动赋值为null类型．</p>
+<h3 id="Map和List"><a href="#Map和List" class="headerlink" title="Map和List"></a>Map和List</h3></li>
+<li><p>与js中Array和Map基本一致，但在js中不是基本数据类型，属于引用数据类型．分类不同，在用法和类型上没有什么差异．</p>
+<h3 id="弱类型-var-object及dynamic"><a href="#弱类型-var-object及dynamic" class="headerlink" title="弱类型-var,object及dynamic"></a>弱类型-var,object及dynamic</h3></li>
+<li><p>dart也存在弱类型，使用var,object,dynamic来声明，同时为了避免弱类型导致客户端Crash的异常，Dart对弱类型加强了检验．</p>
+</li>
+<li><p>var声明，第一次赋值将数据类型绑定，如果再更改类型，会在dart编译前就报错．</p>
+</li>
+<li><p>object声明相当于js中的var声明赋值，在编译期间，object会对数据调用做一定判断并且报错，声明与调用必须是对应的类型．如声明为String类型，调用length就会报错．由于数据可能来自接口层，所以减少使用以避免运行时报错导致客户端Crash的异常．</p>
+</li>
+<li><p>dynamic也是动态数据类型，但数据类型调用异常时只会在运行时报错，不会在编译前和编译期间导致报错，所以这点很危险．</p>
+</li>
+</ul>
+<h2 id="基础运算符"><a href="#基础运算符" class="headerlink" title="基础运算符"></a><span style="color:#00e079">基础运算符</h2><ul>
+<li>dart是强数据类型因此没有”===”运算符．同时有一些类型测试运算符和js中类型转换以及typeof相似．不加介绍．<h3 id="运算符"><a href="#运算符" class="headerlink" title="??运算符"></a>??运算符</h3></li>
+</ul>
+<ul>
+<li>t??’test’即t!=null?t:’test’<h3 id="级联操作"><a href="#级联操作" class="headerlink" title="级联操作"></a>级联操作</h3></li>
+<li>允许对同一对象或者函数进行一系列操作，依次调用方法<br>如<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">testObj.add(&#39;t&#39;)</span><br><span class="line">...delete(&#39;a&#39;)</span><br><span class="line">...show()</span><br></pre></td></tr></table></figure>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a><span style="color:#00e079">函数</span></h2></li>
+</ul>
+<ul>
+<li>明显区别就是dart由于是强数据类型，所以在声明函数的时候可以增加一个返回值类型．<h2 id="类"><a href="#类" class="headerlink" title=" 类"></a><span style="color:#00e079"> 类</span></h2><h3 id="命名构造函数"><a href="#命名构造函数" class="headerlink" title="命名构造函数"></a>命名构造函数</h3></li>
+<li>支持多个构造函数，实例化可以有选择<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class People&#123;</span><br><span class="line">    String face;</span><br><span class="line">    People.nice()&#123;</span><br><span class="line">        this.face &#x3D; &#39;nice&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    People.bad()&#123;</span><br><span class="line">        this.face &#x3D; &#39;bad&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">void main(List&lt;String&gt;args)&#123;</span><br><span class="line">    People niceOne &#x3D; new People.nice();</span><br><span class="line">    print(niceOne.face);</span><br><span class="line">    People badOone &#x3D; new Poeple.bad();</span><br><span class="line">    print(badOne.face)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+结果不言而喻<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3></li>
+</ul>
+<ul>
+<li>需要设置私有属性，就在方法或者属性前添加’_’<h3 id="抽象类和泛型类"><a href="#抽象类和泛型类" class="headerlink" title="抽象类和泛型类"></a>抽象类和泛型类</h3></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>flutter</tag>
+        <tag>dart</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>事件循环EventLoop(一)</title>
     <url>/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/</url>
     <content><![CDATA[<h1 id="EventLoop-一"><a href="#EventLoop-一" class="headerlink" title="EventLoop(一)"></a><center><span style="color:grey">EventLoop(一)</span></center></h1><h2 id="运行时概念"><a href="#运行时概念" class="headerlink" title="运行时概念"></a><span style="color:#00e079">运行时概念</span></h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ul>
