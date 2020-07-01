@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>dart基础(一)</title>
+    <title>flutter系列之dart事件循环</title>
+    <url>/2020/07/01/dart%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</url>
+    <content><![CDATA[<p>上一篇介绍了dart基础．这一篇将讲述flutter代码的执行和运行的机制．</p>
+<h1 id="Dart单线程"><a href="#Dart单线程" class="headerlink" title="Dart单线程"></a><span style="color:#00e079">Dart单线程</span></h1><ul>
+<li>类比js．js单线程关键点在于主线程，微任务与宏任务．<br>  *　主线程－主业务逻辑<ul>
+<li>异步，网络I/O,本地文件I/O,采用事件驱动执行    </li>
+</ul>
+</li>
+<li>dart中单线程执行，其中包含两个事件队列，一个是微任务事件队列，一个是事件队列(对应于js的宏任务)<br>  -　微任务队列：scheduleMicrotask调度<ul>
+<li>事件队列: 包含外部事件，如I/O,Timer,绘制事件等等<h2 id="事件循环过程"><a href="#事件循环过程" class="headerlink" title="事件循环过程"></a>事件循环过程</h2></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>执行main函数，产生微任务和事件任务队列</li>
+<li>判断是否存在微任务，有则执行，执行完后再判断是否还存在微任务，没则判断是否存在事件任务（即每当一个任务执行完成后，微任务会执行到微任务队列清空再去看事件队列是否有任务)</li>
+<li>如果有事件任务，执行完后再判断是否还有微任务，如果有先执行微任务．如2</li>
+<li>在微任务和宏任务执行时，也会产生新的微任务和事件任务．<a id="more"></a>
+来看两道常见的例题<br>例1.<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#39;dart:async&#39;; </span><br><span class="line">void main() </span><br><span class="line">&#123; print(&#39;flow start&#39;); &#x2F;&#x2F; 执行打印开始  </span><br><span class="line">&#x2F;&#x2F; 执行判断为事件任务，添加到事件任务队列 </span><br><span class="line">Timer.run(()&#123;         </span><br><span class="line">    print(&#39;event&#39;); &#x2F;&#x2F; 执行事件任务，打印标记     </span><br><span class="line">&#125;);     </span><br><span class="line">    &#x2F;&#x2F; 执行判断为微任务，添加到微任务队列</span><br><span class="line">scheduleMicrotask(()&#123;          </span><br><span class="line">    print(&#39;microtask&#39;); &#x2F;&#x2F; 执行微任务，打印标记     </span><br><span class="line">&#125;); </span><br><span class="line">    print(&#39;flow end&#39;); &#x2F;&#x2F; 打印结束标记 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+结果是<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">flow start </span><br><span class="line">flow end </span><br><span class="line">microtask </span><br><span class="line">event</span><br></pre></td></tr></table></figure>
+分析过程：</li>
+<li>首先执行main函数中的代码，打印flow start</li>
+<li>Timer为事件任务，放入事件队列，scheduleMicrotask为微任务，放入微任务队列，同时向下执行代码打印flow end</li>
+<li>先从微任务队列中取出微任务执行，因此打印microtask</li>
+<li>微任务队列为空，则从事件任务队列中取出事件任务执行，打印event<br>例2.<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#39;dart:async&#39;; </span><br><span class="line">void main() &#123; </span><br><span class="line">    print(&#39;flow start&#39;); &#x2F;&#x2F; 执行打印开始   </span><br><span class="line">    &#x2F;&#x2F; 执行判断为事件任务，添加到事件任务队列 </span><br><span class="line">    Timer.run(()&#123;          </span><br><span class="line">        print(&#39;event&#39;); &#x2F;&#x2F; 执行事件任务，打印事件任务记  </span><br><span class="line">        &#x2F;&#x2F; 执行判断为微任务，添加到微任务队列          scheduleMicrotask(()&#123;          </span><br><span class="line">            print(&#39;microtask in event&#39;); </span><br><span class="line">            &#x2F;&#x2F; 执行微任务，打印微任务标记    </span><br><span class="line">             &#125;);     </span><br><span class="line">        &#125;);   &#x2F;&#x2F; 执行判断为微任务，添加到微任务队列  scheduleMicrotask(()&#123;          </span><br><span class="line">            print(&#39;microtask&#39;); &#x2F;&#x2F; 执行微任务，打印微任务执行标记         </span><br><span class="line">            &#x2F;&#x2F; 执行判断为事件任务，添加到事件任务队列 Timer.run(()&#123;          </span><br><span class="line">                print(&#39;event in microtask&#39;); &#x2F;&#x2F; 执行事件任务，打印事件任务标记    </span><br><span class="line">            &#125;);     </span><br><span class="line">        &#125;); </span><br><span class="line">        print(&#39;flow end&#39;); &#x2F;&#x2F; 打印结束标记 </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+结果<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">flow start </span><br><span class="line">flow end </span><br><span class="line">microtask </span><br><span class="line">event </span><br><span class="line">microtask in event </span><br><span class="line">event in microtask</span><br></pre></td></tr></table></figure>
+分析过程：</li>
+<li>main函数中代码先执行打印flow start</li>
+<li>Timer,为事件任务，放入事件任务队列．</li>
+<li>代码向下执行，scheduleMicrotask为微任务，放入微任务队列</li>
+<li>继续向下执行，打印flow end</li>
+<li>此时，微任务队列中有任务，因此执行scheduleMicrotask中代码，先print microtask,然后Timer放入事件任务队列</li>
+<li>微任务队列为空，因此去事件任务队列取出最先放入队列中的事件任务．打印event,向下遇到scheduleMicrotask，放入微任务队列．</li>
+<li>事件任务执行完毕后，由于微任务队列中有任务，所以执行微任务．因此先打印microtask in event．</li>
+<li>最后执行事件任务队列中的打印event in microtask<h1 id="引发出的一个问题"><a href="#引发出的一个问题" class="headerlink" title="引发出的一个问题"></a><span style="color:#00e079">引发出的一个问题</span></h1></li>
+</ol>
+<ul>
+<li>dart在运行过程中可能被事件运行卡住</li>
+<li>可想而知的是，当事件任务执行时，如果进行了密集计算，其中等待事件任务执行结束的时间就会增长．</li>
+<li>而从事件循环．我们知道如果当前事件任务没有执行结束，是无法进行下一轮循环的．因此整个dart运行就会被卡住．</li>
+<li>因此避免由于事件密集计算而导致较差的用户体验．</li>
+</ul>
+<p>关于dart多线程内容，我们放在下一篇博客中介绍，届时我们会对dart运行原理大概有一个整体的掌握．然后就会进入flutter的学习之中．</p>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>dart</tag>
+        <tag>flutter</tag>
+        <tag>事件循环</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>flutter系列之dart基础</title>
     <url>/2020/06/29/dart%E5%9F%BA%E7%A1%80(%E4%B8%80)/</url>
-    <content><![CDATA[ <center><span style="color:grey">dart基础(一)</span></center>
-由于近期有学习flutter的兴趣，因此首先学习其所需的编程语言dart.并采用dart与js对比差异的方式来进行学习．
-
+    <content><![CDATA[<p>由于近期有学习flutter的兴趣，因此首先学习其所需的编程语言dart.并采用dart与js对比差异的方式来进行学习．</p>
 <h1 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a><span style="color:#00e079">基础数据类型</span></h1><ul>
 <li><p>Number和String与js使用基本一致</p>
 <h2 id="Symbol的区别"><a href="#Symbol的区别" class="headerlink" title="Symbol的区别"></a>Symbol的区别</h2><ul>
@@ -67,33 +119,33 @@
         <category>Web前端</category>
       </categories>
       <tags>
-        <tag>flutter</tag>
         <tag>dart</tag>
+        <tag>flutter</tag>
       </tags>
   </entry>
   <entry>
     <title>事件循环EventLoop(一)</title>
     <url>/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/</url>
-    <content><![CDATA[<h1 id="EventLoop-一"><a href="#EventLoop-一" class="headerlink" title="EventLoop(一)"></a><center><span style="color:grey">EventLoop(一)</span></center></h1><h2 id="运行时概念"><a href="#运行时概念" class="headerlink" title="运行时概念"></a><span style="color:#00e079">运行时概念</span></h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ul>
+    <content><![CDATA[<h1 id="运行时概念"><a href="#运行时概念" class="headerlink" title="运行时概念"></a><span style="color:#00e079">运行时概念</span></h1><h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><ul>
 <li><p>函数调用形成若干帧组成栈</p>
-<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3></li>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2></li>
 <li><p>对于js，对象处于堆中(非结构化的内存区域)</p>
-<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3></li>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2></li>
 <li><p>js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．</p>
 </li>
 <li><p>在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，<span style="color:red">作为参数来调用与之关联的函数</span>，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联系的关系．</p>
 </li>
 <li><p>函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)</p>
-<h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a><span style="color:#00e079">事件循环</span></h2><a id="more"></a>
+<h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a><span style="color:#00e079">事件循环</span></h1><a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">while (queue.waitForMessage()) &#123;</span><br><span class="line">  queue.processNextMessage();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>类似于如此调用</p>
-<h3 id="执行至完成"><a href="#执行至完成" class="headerlink" title="执行至完成"></a>执行至完成</h3></li>
+<h2 id="执行至完成"><a href="#执行至完成" class="headerlink" title="执行至完成"></a>执行至完成</h2></li>
 <li><p>每个消息完整的执行后，执行其它消息</p>
 </li>
 <li><p>　它当一个函数在执行时，不会被抢占，同时只有在它运行结束之后才能运行其它代码，这与C语言不同，如如果函数在线程中运行，可以在任何地方被终止,然后在另一个线程中运行其它代码．</p>
 </li>
 <li><p>缺点在于当一个消息占用太多时间来处理时，web应用会无法处理与用户的交互，<br>因此需要减少单独处理时间，或是分割处理多个子消息．</p>
-<h3 id="添加消息"><a href="#添加消息" class="headerlink" title="添加消息"></a>添加消息</h3></li>
+<h2 id="添加消息"><a href="#添加消息" class="headerlink" title="添加消息"></a>添加消息</h2></li>
 <li><p>事件发生并且有事件监听器绑定在该事件上时，会把一个消息添加到消息队列．无事件监听器，消息会消失</p>
 </li>
 <li><p>例如一个点击事件处理器的元素被点击，会像其它事件一样产生一个类似的消息．</p>
@@ -101,7 +153,7 @@
 <li><p>setTimeOut实际上就包含了两个参数，第一个参数是消息，所以第二个参数反应的延迟时间不一定是真实的，而是要看消息队列中有没有正在处理的消息，若有，则需要等待处理完毕，然后会将消息添加到消息队列．</p>
 </li>
 <li><p>如果队列无消息并且栈也为空，则这段延迟过后，会马上处理消息．</p>
-<h2 id="永不阻塞"><a href="#永不阻塞" class="headerlink" title="永不阻塞"></a><span style="color:#00e079">永不阻塞</span></h2></li>
+<h1 id="永不阻塞"><a href="#永不阻塞" class="headerlink" title="永不阻塞"></a><span style="color:#00e079">永不阻塞</span></h1></li>
 <li><p>js事件循环模型使得与其他语言不同，它永不阻塞．处理I/O通常通过事件和回调来执行．<br>所以当一个应用正等待一个 IndexedDB 查询返回或者一个 XHR 请求返回时，它仍然可以处理其它事情，比如用户输入。</p>
 </li>
 </ul>
@@ -116,12 +168,12 @@
   <entry>
     <title>javascript的内存管理</title>
     <url>/2020/05/31/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a><center><span style="color:grey">内存管理</span></center></h1><h2 id="内存生命周期"><a href="#内存生命周期" class="headerlink" title="内存生命周期"></a><span style="color:#00e079">内存生命周期</span></h2><ul>
+    <content><![CDATA[<h1 id="内存生命周期"><a href="#内存生命周期" class="headerlink" title="内存生命周期"></a><span style="color:#00e079">内存生命周期</span></h1><ul>
 <li>分配你所需要的内存</li>
 <li>使用分配到的内存读写</li>
 <li>不需要时将其释放\归还</li>
 </ul>
-<h2 id="javascript的内存分配"><a href="#javascript的内存分配" class="headerlink" title="javascript的内存分配"></a><span style="color:#00e079">javascript的内存分配</span></h2><ul>
+<h1 id="javascript的内存分配"><a href="#javascript的内存分配" class="headerlink" title="javascript的内存分配"></a><span style="color:#00e079">javascript的内存分配</span></h1><ul>
 <li>值初始化</li>
 <li>函数调用</li>
 <li>使用值<ul>
@@ -133,7 +185,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title=" 垃圾回收"></a><span style="color:#00e079"> 垃圾回收</span></h2><ul>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title=" 垃圾回收"></a><span style="color:#00e079"> 垃圾回收</span></h1><ul>
 <li>引用<ul>
 <li>在内存管理的environment中，一个对象如果有访问另一个对象的权限，就叫一个对象引用另一个对象．对象对它原型的引用(隐式引用)，对它属性的引用(显式引用)．</li>
 <li>对象包括函数作用域(全局词法作用域)<a id="more"></a></li>
