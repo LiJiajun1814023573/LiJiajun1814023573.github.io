@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-29T15:15:36.727Z</updated>
+  <updated>2020-06-29T15:26:19.957Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,14 +21,16 @@
     <link href="http://yoursite.com/2020/06/29/dart%E5%9F%BA%E7%A1%80(%E4%B8%80)/"/>
     <id>http://yoursite.com/2020/06/29/dart%E5%9F%BA%E7%A1%80(%E4%B8%80)/</id>
     <published>2020-06-29T14:08:11.019Z</published>
-    <updated>2020-06-29T15:15:36.727Z</updated>
+    <updated>2020-06-29T15:26:19.957Z</updated>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;dart基础-一&quot;&gt;&lt;a href=&quot;#dart基础-一&quot; class=&quot;headerlink&quot; title=&quot;dart基础(一)&quot;&gt;&lt;/a&gt;&lt;center&gt;&lt;span style=&quot;color:grey&quot;&gt;dart基础(一)&lt;/span&gt;&lt;/center&gt;&lt;/h1&gt;&lt;p&gt;由于近期有学习flutter的兴趣，因此首先学习其所需的编程语言dart.并采用dart与js对比差异的方式来进行学习．&lt;/p&gt;
-&lt;h2 id=&quot;基础数据类型&quot;&gt;&lt;a href=&quot;#基础数据类型&quot; class=&quot;headerlink&quot; title=&quot;基础数据类型&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;基础数据类型&lt;/span&gt;&lt;/h2&gt;&lt;ul&gt;
+      &lt;center&gt;&lt;span style=&quot;color:grey&quot;&gt;dart基础(一)&lt;/span&gt;&lt;/center&gt;
+由于近期有学习flutter的兴趣，因此首先学习其所需的编程语言dart.并采用dart与js对比差异的方式来进行学习．
+
+&lt;h1 id=&quot;基础数据类型&quot;&gt;&lt;a href=&quot;#基础数据类型&quot; class=&quot;headerlink&quot; title=&quot;基础数据类型&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;基础数据类型&lt;/span&gt;&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Number和String与js使用基本一致&lt;/p&gt;
-&lt;h3 id=&quot;Symbol的区别&quot;&gt;&lt;a href=&quot;#Symbol的区别&quot; class=&quot;headerlink&quot; title=&quot;Symbol的区别&quot;&gt;&lt;/a&gt;Symbol的区别&lt;/h3&gt;&lt;ul&gt;
+&lt;h2 id=&quot;Symbol的区别&quot;&gt;&lt;a href=&quot;#Symbol的区别&quot; class=&quot;headerlink&quot; title=&quot;Symbol的区别&quot;&gt;&lt;/a&gt;Symbol的区别&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;js中，Symbol是将基础数据类型转换为唯一标识符，核心应用是将复杂引用数据类型转换为对象数据类型的键名．具体可参考&lt;a href=&quot;https://www.jianshu.com/p/4da037782be9&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;js中Symbol,map,set&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;在 Dart 中，Symbol 是不透明的动态字符串名称，用于反映库中的元数据。用 Symbol 可以获得或引用类的一个镜像，概念比较复杂，但其实和 JavaScript 的用法基本上是一致的。例如，下面代码首先 new 了一个 test 为 Map 数据类型，设置一个属性 #t（Symbol 类型），然后分别打印 test、test 的 #t、test 的 Symbol(“t”) 和 #t。&lt;/p&gt;
