@@ -2,66 +2,96 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>青山入我怀</title>
   
-  <subtitle>尔入我梦来</subtitle>
+  
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2020-07-01T15:39:26.820Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="/"/>
+  <updated>2020-07-03T11:37:48.942Z</updated>
+  <id>/</id>
   
   <author>
-    <name>不还</name>
+    <name>LiJiajun</name>
     
   </author>
   
-  <generator uri="https://hexo.io/">Hexo</generator>
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>webGL入门(一)</title>
+    <link href="/2020/07/03/WebGL%E5%85%A5%E9%97%A8(%E4%B8%80)/"/>
+    <id>/2020/07/03/WebGL入门(一)/</id>
+    <published>2020-07-03T00:59:35.637Z</published>
+    <updated>2020-07-03T11:37:48.942Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;WebGL介绍&quot;&gt;&lt;a href=&quot;#WebGL介绍&quot; class=&quot;headerlink&quot; title=&quot;WebGL介绍&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;WebGL介绍&lt;/span&gt;&lt;/h1&gt;&lt;h2 id=&quot;产生背景&quot;&gt;&lt;a href=&quot;#产生背景&quot; class=&quot;headerlink&quot; title=&quot;产生背景&quot;&gt;&lt;/a&gt;产生背景&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;WebGL出现之前，浏览器想要实现3d效果必须借助浏览器插件，如Adobe的flash，微软的silverLight等等&lt;/li&gt;
+&lt;li&gt;WebGL 是一组基于 JavaScript 语言的图形规范，浏览器厂商按照这组规范进行实现，为 Web 开发者提供一套3D图形相关的 API&lt;ul&gt;
+&lt;li&gt;这套api，使得开发者能够使用javscript语言与gpu进行通信．而webGL的gpu部分也有对应的编程语言简称GLSL,GLSL程序即为运行在gpu上的着色器程序．着色器程序接受cpu传递过来的数据（webgl使用js），然后对数据进行流水线处理，就可以显示在屏幕上从而实现各种3d应用．&lt;h2 id=&quot;工作方式&quot;&gt;&lt;a href=&quot;#工作方式&quot; class=&quot;headerlink&quot; title=&quot;工作方式&quot;&gt;&lt;/a&gt;工作方式&lt;/h2&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;WebGL的工作方式与流水线相似．从得到数据到渲染到屏幕上，流水线按照既定的步骤从原料到加工，每一步的处理的原材料是上一步加工得到的结果，加工最终形成完整的产品．这种渲染方式我们称之为图形管线/渲染管线&lt;/li&gt;
+&lt;li&gt;WebGL的图元是点，线段，三角形三种图元，而对于其它的webGL程序中出现的图形甚至一些逼真的不规则模型，都是由gpu将点用三角形图元绘制，并且由三角形平面拼接而成得到的．&lt;/li&gt;
+&lt;li&gt;传递给gpu的顶点数据和变换矩阵数据，顶点经过转换之后的坐标是webGL接受的坐标，即gpu渲染管线对这些数据进行流水线作业．&lt;h2 id=&quot;gpu渲染管线作用过程&quot;&gt;&lt;a href=&quot;#gpu渲染管线作用过程&quot; class=&quot;headerlink&quot; title=&quot;gpu渲染管线作用过程&quot;&gt;&lt;/a&gt;gpu渲染管线作用过程&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;首先进入顶点着色器阶段，利用 GPU 的并行计算优势对顶点逐个进行坐标变换。&lt;/li&gt;
+&lt;li&gt;然后进入图元装配阶段，将顶点按照图元类型组装成图形。&lt;/li&gt;
+&lt;li&gt;接下来来到光栅化阶段，光栅化阶段将图形用不包含颜色信息的像素填充。&lt;/li&gt;
+&lt;li&gt;在之后进入片元着色器阶段，该阶段为像素着色，并最终显示在屏幕上。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;GLSL&quot;&gt;&lt;a href=&quot;#GLSL&quot; class=&quot;headerlink&quot; title=&quot;GLSL&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;GLSL&lt;/span&gt;&lt;/h1&gt;
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="WebGL" scheme="/tags/WebGL/"/>
+    
+  </entry>
   
   <entry>
     <title>flutter系列之dart事件循环</title>
-    <link href="http://yoursite.com/2020/07/01/dart%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"/>
-    <id>http://yoursite.com/2020/07/01/dart%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/</id>
+    <link href="/2020/07/01/dart%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"/>
+    <id>/2020/07/01/dart事件循环/</id>
     <published>2020-07-01T14:23:29.026Z</published>
-    <updated>2020-07-01T15:39:26.820Z</updated>
+    <updated>2020-07-03T11:37:31.362Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;上一篇介绍了dart基础．这一篇将讲述flutter代码的执行和运行的机制．&lt;/p&gt;
-&lt;h1 id=&quot;Dart单线程&quot;&gt;&lt;a href=&quot;#Dart单线程&quot; class=&quot;headerlink&quot; title=&quot;Dart单线程&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;Dart单线程&lt;/span&gt;&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;类比js．js单线程关键点在于主线程，微任务与宏任务．&lt;br&gt;  *　主线程－主业务逻辑&lt;ul&gt;
+&lt;h1 id=&quot;Dart单线程&quot;&gt;&lt;a href=&quot;#Dart单线程&quot; class=&quot;headerlink&quot; title=&quot;Dart单线程&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;Dart单线程&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;类比js．js单线程关键点在于主线程，微任务与宏任务．&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主线程－主业务逻辑&lt;/li&gt;
 &lt;li&gt;异步，网络I/O,本地文件I/O,采用事件驱动执行    &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;dart中单线程执行，其中包含两个事件队列，一个是微任务事件队列，一个是事件队列(对应于js的宏任务)&lt;br&gt;  -　微任务队列：scheduleMicrotask调度&lt;ul&gt;
-&lt;li&gt;事件队列: 包含外部事件，如I/O,Timer,绘制事件等等&lt;h2 id=&quot;事件循环过程&quot;&gt;&lt;a href=&quot;#事件循环过程&quot; class=&quot;headerlink&quot; title=&quot;事件循环过程&quot;&gt;&lt;/a&gt;事件循环过程&lt;/h2&gt;&lt;/li&gt;
+&lt;p&gt;dart中单线程执行，其中包含两个事件队列，一个是微任务事件队列，一个是事件队列(对应于js的宏任务)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;微任务队列：scheduleMicrotask调度&lt;/li&gt;
+&lt;li&gt;事件队列: 包含外部事件，如I/O,Timer,绘制事件等等&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;执行main函数，产生微任务和事件任务队列&lt;/li&gt;
-&lt;li&gt;判断是否存在微任务，有则执行，执行完后再判断是否还存在微任务，没则判断是否存在事件任务（即每当一个任务执行完成后，微任务会执行到微任务队列清空再去看事件队列是否有任务)&lt;/li&gt;
-&lt;li&gt;如果有事件任务，执行完后再判断是否还有微任务，如果有先执行微任务．如2&lt;/li&gt;
-&lt;li&gt;在微任务和宏任务执行时，也会产生新的微任务和事件任务．
+&lt;h2 id=&quot;事件循环过程&quot;&gt;&lt;a href=&quot;#事件循环过程&quot; class=&quot;headerlink&quot; title=&quot;事件循环过程&quot;&gt;&lt;/a&gt;事件循环过程&lt;/h2&gt;&lt;p&gt;对于js的事件循环之前有出过一篇文章，此处再贴一篇讲的很不错的js事件循环的文章，有助于对其加深理解．&lt;br&gt;&lt;a href=&quot;https://github.com/dwqs/blog/issues/61&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;从一道题浅说JavaScript的事件循环&lt;/a&gt;&lt;br&gt;而对于dart，刚才介绍了dart单线程相关的核心内容，在掌握了js的事件循环后，类比到dart上也十分容易．&lt;/p&gt;
+&lt;p&gt;1).执行main函数，产生微任务和事件任务队列&lt;br&gt;2).判断是否存在微任务，有则执行，执行完后再判断是否还存在微任务，没则判断是否存在事件任务（即每当一个任务执行完成后，微任务会执行到微任务队列清空再去看事件队列是否有任务)&lt;br&gt;3).如果有事件任务，执行完后再判断是否还有微任务，如果有先执行微任务．如2&lt;br&gt;4).在微任务和宏任务执行时，也会产生新的微任务和事件任务．&lt;br&gt;
     
     </summary>
     
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="Web前端" scheme="http://yoursite.com/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
+      <category term="dart" scheme="/tags/dart/"/>
     
-      <category term="dart" scheme="http://yoursite.com/tags/dart/"/>
+      <category term="flutter" scheme="/tags/flutter/"/>
     
-      <category term="flutter" scheme="http://yoursite.com/tags/flutter/"/>
-    
-      <category term="事件循环" scheme="http://yoursite.com/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"/>
+      <category term="事件循环" scheme="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"/>
     
   </entry>
   
   <entry>
     <title>flutter系列之dart基础</title>
-    <link href="http://yoursite.com/2020/06/29/dart%E5%9F%BA%E7%A1%80(%E4%B8%80)/"/>
-    <id>http://yoursite.com/2020/06/29/dart%E5%9F%BA%E7%A1%80(%E4%B8%80)/</id>
+    <link href="/2020/06/29/dart%E5%9F%BA%E7%A1%80(%E4%B8%80)/"/>
+    <id>/2020/06/29/dart基础(一)/</id>
     <published>2020-06-29T14:08:11.019Z</published>
-    <updated>2020-07-01T14:25:19.354Z</updated>
+    <updated>2020-07-03T11:37:55.950Z</updated>
     
     <summary type="html">
     
@@ -69,61 +99,62 @@
 &lt;h1 id=&quot;基础数据类型&quot;&gt;&lt;a href=&quot;#基础数据类型&quot; class=&quot;headerlink&quot; title=&quot;基础数据类型&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;基础数据类型&lt;/span&gt;&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Number和String与js使用基本一致&lt;/p&gt;
 &lt;h2 id=&quot;Symbol的区别&quot;&gt;&lt;a href=&quot;#Symbol的区别&quot; class=&quot;headerlink&quot; title=&quot;Symbol的区别&quot;&gt;&lt;/a&gt;Symbol的区别&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;js中，Symbol是将基础数据类型转换为唯一标识符，核心应用是将复杂引用数据类型转换为对象数据类型的键名．具体可参考&lt;a href=&quot;https://www.jianshu.com/p/4da037782be9&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;js中Symbol,map,set&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;js中，Symbol是将基础数据类型转换为唯一标识符，核心应用是将复杂引用数据类型转换为对象数据类型的键名．具体可参考&lt;a href=&quot;https://www.jianshu.com/p/4da037782be9&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;js中Symbol,map,set&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;在 Dart 中，Symbol 是不透明的动态字符串名称，用于反映库中的元数据。用 Symbol 可以获得或引用类的一个镜像，概念比较复杂，但其实和 JavaScript 的用法基本上是一致的。例如，下面代码首先 new 了一个 test 为 Map 数据类型，设置一个属性 #t（Symbol 类型），然后分别打印 test、test 的 #t、test 的 Symbol(“t”) 和 #t。&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;void main()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123; Map test &amp;#x3D; new Map(); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  test[#t] &amp;#x3D; &amp;#39;symbol test&amp;#39;; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  print(test); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  print(test[#t]); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  print(test[Symbol(&amp;#39;t&amp;#39;)]); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  print(#t);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;结果：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;flutter: &amp;#123;Symbol(&amp;quot;t&amp;quot;): symbol test&amp;#125; flutter: symbol test flutter: symbol test flutter: Symbol(&amp;quot;t&amp;quot;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;#t与Symbol(“t”)结果一致，由此可见，dart中的symbol更像是一个反射概念，而在js中是创建唯一标识的概念．&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;void main()
+{ Map test = new Map(); 
+test[#t] = &amp;#39;symbol test&amp;#39;; 
+print(test); 
+print(test[#t]); 
+print(test[Symbol(&amp;#39;t&amp;#39;)]); 
+print(#t);
+}
+结果：
+flutter: {Symbol(&amp;quot;t&amp;quot;): symbol test} flutter: symbol test flutter: symbol test flutter: Symbol(&amp;quot;t&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;#t与Symbol(“t”)结果一致，由此可见，dart中的symbol更像是一个反射概念，而在js中是创建唯一标识的概念．&lt;/p&gt;
     
     </summary>
     
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="Web前端" scheme="http://yoursite.com/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
+      <category term="dart" scheme="/tags/dart/"/>
     
-      <category term="dart" scheme="http://yoursite.com/tags/dart/"/>
-    
-      <category term="flutter" scheme="http://yoursite.com/tags/flutter/"/>
+      <category term="flutter" scheme="/tags/flutter/"/>
     
   </entry>
   
   <entry>
     <title>事件循环EventLoop(一)</title>
-    <link href="http://yoursite.com/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/"/>
-    <id>http://yoursite.com/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/</id>
+    <link href="/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/"/>
+    <id>/2020/06/02/js基础复习之事件循环EventLoop(一)/</id>
     <published>2020-06-02T15:15:42.000Z</published>
-    <updated>2020-06-29T15:27:39.528Z</updated>
+    <updated>2020-07-03T11:37:25.474Z</updated>
     
     <summary type="html">
     
       &lt;h1 id=&quot;运行时概念&quot;&gt;&lt;a href=&quot;#运行时概念&quot; class=&quot;headerlink&quot; title=&quot;运行时概念&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;运行时概念&lt;/span&gt;&lt;/h1&gt;&lt;h2 id=&quot;栈&quot;&gt;&lt;a href=&quot;#栈&quot; class=&quot;headerlink&quot; title=&quot;栈&quot;&gt;&lt;/a&gt;栈&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;函数调用形成若干帧组成栈&lt;/p&gt;
-&lt;h2 id=&quot;堆&quot;&gt;&lt;a href=&quot;#堆&quot; class=&quot;headerlink&quot; title=&quot;堆&quot;&gt;&lt;/a&gt;堆&lt;/h2&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;对于js，对象处于堆中(非结构化的内存区域)&lt;/p&gt;
-&lt;h2 id=&quot;队列&quot;&gt;&lt;a href=&quot;#队列&quot; class=&quot;headerlink&quot; title=&quot;队列&quot;&gt;&lt;/a&gt;队列&lt;/h2&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，&lt;span style=&quot;color:red&quot;&gt;作为参数来调用与之关联的函数&lt;/span&gt;，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联系的关系．&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)&lt;/p&gt;
-&lt;h1 id=&quot;事件循环&quot;&gt;&lt;a href=&quot;#事件循环&quot; class=&quot;headerlink&quot; title=&quot;事件循环&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;事件循环&lt;/span&gt;&lt;/h1&gt;
+&lt;li&gt;函数调用形成若干帧组成栈&lt;h2 id=&quot;堆&quot;&gt;&lt;a href=&quot;#堆&quot; class=&quot;headerlink&quot; title=&quot;堆&quot;&gt;&lt;/a&gt;堆&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;对于js，对象处于堆中(非结构化的内存区域)&lt;h2 id=&quot;队列&quot;&gt;&lt;a href=&quot;#队列&quot; class=&quot;headerlink&quot; title=&quot;队列&quot;&gt;&lt;/a&gt;队列&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．&lt;/li&gt;
+&lt;li&gt;在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，&lt;span style=&quot;color:red&quot;&gt;作为参数来调用与之关联的函数&lt;/span&gt;，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联系的关系．&lt;/li&gt;
+&lt;li&gt;函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)&lt;h1 id=&quot;事件循环&quot;&gt;&lt;a href=&quot;#事件循环&quot; class=&quot;headerlink&quot; title=&quot;事件循环&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;事件循环&lt;/span&gt;&lt;/h1&gt;
     
     </summary>
     
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="Web前端" scheme="http://yoursite.com/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
-    
-      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+      <category term="javascript" scheme="/tags/javascript/"/>
     
   </entry>
   
   <entry>
     <title>javascript的内存管理</title>
-    <link href="http://yoursite.com/2020/05/31/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
-    <id>http://yoursite.com/2020/05/31/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</id>
+    <link href="/2020/05/31/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+    <id>/2020/05/31/js基础复习之内存管理/</id>
     <published>2020-05-31T06:47:24.000Z</published>
-    <updated>2020-06-29T15:27:20.649Z</updated>
+    <updated>2020-07-03T11:38:01.950Z</updated>
     
     <summary type="html">
     
@@ -151,11 +182,32 @@
     
     </summary>
     
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="Web前端" scheme="http://yoursite.com/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo-Theme-Sakura</title>
+    <link href="/2018/12/12/Hexo-Theme-Sakura/"/>
+    <id>/2018/12/12/Hexo-Theme-Sakura/</id>
+    <published>2018-12-12T14:16:01.000Z</published>
+    <updated>2020-03-16T10:41:30.000Z</updated>
+    
+    <summary type="html">
+    
+      hexo-sakura主题使用教程
+    
+    </summary>
+    
+      <category term="技术" scheme="/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+      <category term="web" scheme="/tags/web/"/>
+    
+      <category term="悦读" scheme="/tags/%E6%82%A6%E8%AF%BB/"/>
     
   </entry>
   
