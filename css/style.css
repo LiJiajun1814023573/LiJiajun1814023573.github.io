@@ -19,7 +19,7 @@
 }
 .aplayer {
     background:#fff;
-    font-family:"Zhi Mang Xing",Arial,Helvetica,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     margin:5px;
     box-shadow:0 2px 2px 0 rgba(0,0,0,.07),0 1px 5px 0 rgba(0,0,0,.1);
     border-radius:2px;
@@ -683,7 +683,6 @@ to {
     transform:translateX(0)
 }
 }html {
-    font-family:"Zhi Mang Xing";
     -webkit-text-size-adjust:100%;
     -ms-text-size-adjust:100%;
     overflow-x:hidden
@@ -1475,9 +1474,10 @@ a:hover,a:active {
     -webkit-transition:all 1s ease
 }
 .site-top ul li a {
-    padding:10px 0;
+    padding:10px 10px;
     display:inline-block;
-    color:black;
+    color:rgb(158,217,0);
+    box-shadow: 5px 5px 10px #8d4bbb;
 }
 .site-top ul li a:hover {
     color:　rgb(158,217,0);
@@ -4088,7 +4088,12 @@ li.feature-2 {
     line-height:30px;
     border-radius:10px;
     box-sizing:initial;
-    white-space:nowrap
+    white-space:nowrap;
+    box-shadow: 5px 3px 3px rgb(2,77,0);
+}
+.header-info:hover{
+    transform:scale(1.2);
+    transition: all 1s ease;
 }
 .header-info:before {
     content:"";
@@ -4103,6 +4108,7 @@ li.feature-2 {
 .header-info p {
     margin:0;
     font-family:'Ubuntu',sans-serif;
+    font-style: oblique 10deg;
     font-weight:700
 }
 .top-social {
@@ -5824,13 +5830,14 @@ button.botui-actions-buttons-button {
     text-decoration-line:none
 }
 .logolink.moe-mashiro .sakurasono {
-    font-size:25px;
+    font-size:0px;
     border-radius:9px;
     padding-bottom:2px;
     padding-top:5px
 }
 .logolink.moe-mashiro .shironeko {
-    margin-left:-5px
+    font-family: "Microsoft Yahei";
+    margin-left:-1px
 }
 .forgetmenot input[type=checkbox] {
     border:1px solid #b4b9be;
