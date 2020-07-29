@@ -384,11 +384,13 @@
 <li>对于js，对象处于堆中(非结构化的内存区域)<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2></li>
 <li>js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．</li>
 <li>在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，<span style="color:red">作为参数来调用与之关联的函数</span>，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联系的关系．</li>
-<li>函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)<h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a><span style="color:#00e079">事件循环</span></h1><a id="more"></a>
+<li>函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)<h1 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a><span style="color:#00e079">事件循环</span></h1></li>
+</ul>
 <pre><code>while (queue.waitForMessage()) {
-queue.processNextMessage();
+  queue.processNextMessage();
 }
-</code></pre>类似于如此调用<h2 id="执行至完成"><a href="#执行至完成" class="headerlink" title="执行至完成"></a>执行至完成</h2></li>
+</code></pre><p>类似于如此调用</p>
+<h2 id="执行至完成"><a href="#执行至完成" class="headerlink" title="执行至完成"></a>执行至完成</h2><ul>
 <li>每个消息完整的执行后，执行其它消息<br>*　它当一个函数在执行时，不会被抢占，同时只有在它运行结束之后才能运行其它代码，这与C语言不同，如如果函数在线程中运行，可以在任何地方被终止,然后在另一个线程中运行其它代码．</li>
 <li><p>缺点在于当一个消息占用太多时间来处理时，web应用会无法处理与用户的交互，<br>因此需要减少单独处理时间，或是分割处理多个子消息．</p>
 <h2 id="添加消息"><a href="#添加消息" class="headerlink" title="添加消息"></a>添加消息</h2></li>

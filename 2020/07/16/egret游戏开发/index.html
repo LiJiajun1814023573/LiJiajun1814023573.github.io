@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Category: Web前端 | 青山入我怀</title>
+  <title itemprop="name">egret游戏开发 | 青山入我怀</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -343,501 +343,306 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img data-src="Web前端.img" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/7.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/7.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      egret游戏开发</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="">
+          </a>
+        </span>
+        <span>
+          <a href=""></a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2020-7-16<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">Web前端.zh</h1>
-    <span class="cat-des">
-      <p>Web前端.en</p>
-    </span>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>游戏目前阶段有以下需求：</p>
+<ul>
+<li>制作英雄图demo与相关动作特效</li>
+<li>探究实现遮罩与碰撞检测</li>
+<li>缓动过程的事件处理</li>
+<li>探究子弹类的处理</li>
+<li>探究寻路算法</li>
+</ul>
+<p>结合egret的h5游戏开发指南，以及基础知识的补充，可以对这些问题有具象化的认识，而不是无从下手，因此对核心内容进行自己的一些总结，部分摘自指南，部分是尝试过程中的结论。</p>
+<h1 id="游戏基础"><a href="#游戏基础" class="headerlink" title="游戏基础"></a>游戏基础</h1><h2 id="显示对象"><a href="#显示对象" class="headerlink" title="显示对象"></a>显示对象</h2><p> 显示对象是能参与渲染的对象的抽象表示</p>
+<ul>
+<li>需要了解的是DisplayObject类是显示对象基类。<ul>
+<li>Sprite类，是用来绘制矢量图形/充当容器。</li>
+<li>Bitmap显示位图</li>
+<li><strong>MovieClip</strong>类，也是继承自显示对象类，<strong>因此我们可以通过该类制作帧动画，并拥有显示对象类的所有方法</strong>后面会给出例子。</li>
+<li>Shape类，用来绘制矢量图形</li>
+<li>….</li>
+</ul>
+</li>
+<li><p>显示列表：显示对象加入显示列表中才能被渲染</p>
+<ul>
+<li>常见的:addChild就是让显示对象加入显示列表，而addChild的调用者是<strong>显示容器</strong>，也就是说只有显示容器可以调用，且其可以嵌套。</li>
+</ul>
+</li>
+<li><p>DisplayObject与DisplayObjectContainer的关系</p>
+<ul>
+<li><strong>DisplayObjectContainer继承自DisplayObject类</strong>，因此显示容器也具有显示对象的属性和方法。Sprite是显示容器，Shape是显示对象。也正是因为显示对象容器继承自显示对象，addChild也可以作用于容器。</li>
+</ul>
+</li>
+<li><p>Shape类绘制矢量图在我们的项目中使用不多暂不多解释，有需求再去查api文档即可。</p>
+</li>
+<li><p>必要时可创建容器，集成一些相联的显示对象组件，进行处理，增删显示对象</p>
+<ul>
+<li>在显示列表删除显示对象，即结束显示对象的渲染，如this.addChild(#一个帧动画#)，帧动画可以使用stop方法停止，如果想结束其渲染，可以使用this.removeChild。<strong>可见显示对象独立于显示列表</strong>也就是说removeChild之后需要在内存中删除才算彻底销毁。</li>
+<li>显示对象只能加入到一个显示列表中</li>
+</ul>
+</li>
+<li>显示对象设置的x,y坐标属性是相对坐标系，其中显示对象具体位置也与锚点有关(后续会有相关运用)</li>
+</ul>
+<h2 id="遮罩与碰撞"><a href="#遮罩与碰撞" class="headerlink" title="遮罩与碰撞"></a>遮罩与碰撞</h2><ul>
+<li>显示对象都具备遮罩功能<ul>
+<li>使用egret.Rectangle(firstx,firsty,lastx,lasty)创建一块矩形区域rect， <strong>然后设置obj.mask = rect.即设置了遮罩。</strong> obj.mask=null取消。</li>
+</ul>
+</li>
+<li>碰撞检测<ul>
+<li>非精确碰撞检测<ul>
+<li>显示对象的方法，hitTestPoint,检测是否与指定点相交，目前来说意义不大。</li>
+</ul>
+</li>
+<li>精确碰撞检测<ul>
+<li>hitTestPoint方法增加一个参数，true开启精确碰撞检测，消耗更多资源，是基于像素的检测而不是包围盒。</li>
+</ul>
+</li>
+<li>包围盒检测<ul>
+<li>文档中没有提到这个，但是指南中给出了，思路是<strong>利用两个包围盒</strong>，即利用egret.Rectangle确定两个矩形区域，然后利用Rectangle类中的方法inersects，rect1.intersects(rect2)来判断是否相交。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><ul>
+<li>对于动画，egret提供多种处理，如逐帧动画，或是tween库实现缓动动画</li>
+</ul>
+<h3 id="逐帧动画"><a href="#逐帧动画" class="headerlink" title="逐帧动画"></a>逐帧动画</h3><ul>
+<li>素材制作<ul>
+<li>采用gif图片转换的方式。可以生成逐帧动画图片和逐帧动画数据，利用的工具是Texture Merger,导出最终文件包含两个一个是描述动画的配置文件.json,一个是图片纹理集。</li>
+</ul>
+</li>
+<li>素材引入<ul>
+<li>egretProperties.json配置文件需要增加game库，原因是这个动画帧类是来自game库的</li>
+<li>default.res.json配置文件加入导入的json文件和纹理集图片。</li>
+</ul>
+</li>
+<li>创建逐帧动画<ul>
+<li>MovieClip中的MovieClipData是存储逐帧动画数据，而MovieClipDataFactory是用来存储MoiveClipData和Texture,存储数据和纹理的。</li>
+<li>MovieClip功能的简化，使得只保留和动画相关的逻辑，而数据，纹理相关的操作与其分离。</li>
+<li>MovieClip的使用：<ul>
+<li>先使用RES.getRes()获得资源（数据和纹理集）</li>
+<li>然后new egret.MovieClipDataFactory(data,tex)得到一个movieClipDataFactory</li>
+<li>new egret.MovieClip(mcf.generateMovieClipData(“mcName(json文件中找到)”))</li>
+<li>即可创建一个MovieClip.包含json也包含纹理集，而json文件中可以得到不同帧资源名。刚创建的时候只能得到第一帧资源，所以mcf.spriteSheet.getTexture(“第一帧资源名”)，这个似乎不是很重要.</li>
+</ul>
+</li>
+<li>其它的例如停止动画，跳转动画，动画缓存的api都可以用到时再查阅了解。</li>
+<li>还可以给帧图片添加事件。这个我没有试过不过应该很有意义。</li>
+</ul>
+</li>
+</ul>
+<h3 id="tween缓动动画"><a href="#tween缓动动画" class="headerlink" title="tween缓动动画"></a>tween缓动动画</h3><ul>
+<li>egret.Tween.get定义缓动<ul>
+<li>第二个参数，<strong>可以加入变化事件处理函数的定义来实现逻辑的实时变化</strong><ul>
+<li>如<pre><code>var obj = {x:0};
+var funcChange = function():void{
+  console.log(this.x);
+}
+egret.Tween.get(obj,{onChange:funcChange,onChangeObj:obj}).to({x:600},1000,egret.Ease.backInOut);
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缓动对象的控制有一些方法<ul>
+<li>主要有两种如call，用于缓动后的回调</li>
+<li>如wait用于指定多个缓动连续设定中设置中间等待时间</li>
+</ul>
+</li>
+</ul>
+<h1 id="应用解决"><a href="#应用解决" class="headerlink" title="应用解决"></a>应用解决</h1><p>针对以下需求：</p>
+<ul>
+<li>制作英雄图demo与相关动作特效</li>
+<li>探究实现遮罩与碰撞检测</li>
+<li>缓动过程的事件处理</li>
+<li>探究子弹类的处理 </li>
+<li>探究寻路算法 (待完成)</li>
+</ul>
+<p>1 <strong>制作英雄图demo与相关动作特效</strong></p>
+<pre><code>截取素材，利用工具制作gif,利用Texture Merger导出再应用到egret项目中。
+</code></pre><p>在main.ts测试<br>在createGameScene方法中</p>
+<pre><code>    var data = RES.getRes(&quot;test_json&quot;);
+    var txtr = RES.getRes(&quot;test_png&quot;);
+    var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
+    var mc1:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData(&quot;1&quot;));
+    this.addChild(mc1);
+    this.stage.frameRate = 60;
+    mc1.addEventListener(egret.Event.ENTER_FRAME,this.move,mc1);
+    mc1.anchorOffsetX = 53;
+    mc1.anchorOffsetY = 58.5;
+    mc1.x = 53;
+    mc1.y = 58.5;
+    mc1.gotoAndPlay(1,-1);
+</code></pre><p>首先我们关注这一部分：<br>这是用来创建动画帧，然后加入到舞台的</p>
+<pre><code>var data = RES.getRes(&quot;test_json&quot;);
+    var txtr = RES.getRes(&quot;test_png&quot;);
+    var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory( data, txtr );
+    var mc1:egret.MovieClip = new egret.MovieClip(mcFactory.generateMovieClipData(&quot;1&quot;));
+    this.addChild(mc1);
+</code></pre><p>在播放之前，我们写了监听，每一帧改变图片的坐标，使得图片运动起来，这样使得动画也可以运动起来，move方法等会解释。</p>
+<pre><code>    mc1.addEventListener(egret.Event.ENTER_FRAME,this.move,mc1);
+</code></pre><p>这里设置锚点为动画图片的一半宽一半高，因为没有anchorX和anchorY方法(这个可以直接设置相对比例0.5).<br>关于锚点在了解后，如果我们想图片从原点开始需要设置x,y坐标为宽高的一半，因为是以锚点为基准进行定位了。</p>
+<pre><code>    mc1.anchorOffsetX = 53;
+    mc1.anchorOffsetY = 58.5;
+    mc1.x = 53;
+    mc1.y = 58.5;
+    mc1.gotoAndPlay(1,-1);
+</code></pre><p>move方法，之所以设置锚点，是为了图片进行旋转，否则会出现bug，即旋转之后又x坐标减小，同时为了模拟碰撞，做了一个测试，即当检测到300,40的点时，改变角度，同时更改行动方式。这里就没有针对不同角度给出不同的动画了，对于一个小游戏可能过于繁琐，而是采用图片旋转的方式，不过看上去有点别扭。</p>
+<pre><code>  private move(evt:egret.Event){
+
+        if(this.hitTestPoint(300,40)){
+        this.rotation = 90;
+        this.y = this.y + 1;
+        }else{
+        this.rotation = 0;
+        this.x = this.x + 1;
+        }
+    }
+</code></pre><p>2 <strong>碰撞检测</strong></p>
+<pre><code>  如果有碰撞检测的需求，可以结合上面提到的两个包围盒方法进行针对性解决.
+  由于可显示对象都是图片，有宽高，有x,y坐标，因此包围盒的方法还是有效的。
+  但是图片中人物的占空间和其它实际因素可能会影响，根据需求选择。
+</code></pre><p>3 <strong>缓动过程的事件处理</strong></p>
+<pre><code>  如果是动画的事件处理，如对于死亡事件，我们可以直接stop动画，然后从父容器中remove，随后delete帧动画。
+  这样可以解决动画结束之前死亡的问题，至于何时攻击有效，可能得经过调试，也可以做的模糊一些。
+  如果是缓动过程需要有事件处理，如子弹的缓动过程碰到目标之前遇到其它敌方英雄，缓动提前结束，这是一个事件处理，这里可以直接获取tween对象，使用缓动结束方法，使用改方法的条件，可以采用碰撞检测的方式，即子弹与目标进行碰撞就终止缓动，可以把子弹当作一个点，或是矩形，这是后面具体处理方式的不同。
+</code></pre><p>4 <strong>子弹的处理</strong></p>
+<pre><code>方便的方式即是采用缓动，并且使用tween.to来进行子弹移动.
+其实把子弹的移动速度提高，3中提到的子弹缓动过程的事件处理是不需要的，因为只要确定tween.to的目标几乎总能击中目标。
+</code></pre>
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="/img/custom/donate/AliPayQR.jpg"></li>
+                <li class="wechat-code"><img src="/img/custom/donate/WeChanQR.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/07/29/ES6重难点细解/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/8.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/8.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                ES6重难点细解</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/07/03/WebGL入门(一)/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/5.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/5.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                webGL入门(一)</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/29/ES6重难点细解/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/8.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/29/ES6重难点细解/">
-    ES6重难点细解</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-29</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/29/ES6重难点细解/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/16/egret游戏开发/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/7.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/16/egret游戏开发/">
-    egret游戏开发</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-16</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/16/egret游戏开发/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/03/WebGL入门(一)/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/5.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/03/WebGL入门(一)/">
-    webGL入门(一)</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-3</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/03/WebGL入门(一)/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/01/dart事件循环/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/15.jpeg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/01/dart事件循环/">
-    flutter系列之dart事件循环</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-1</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/01/dart事件循环/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/06/29/dart基础(一)/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/2.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/06/29/dart基础(一)/">
-    flutter系列之dart基础</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-6-29</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/06/29/dart基础(一)/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/06/02/js基础复习之事件循环EventLoop(一)/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/6.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/06/02/js基础复习之事件循环EventLoop(一)/">
-    事件循环EventLoop(一)</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-6-2</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/06/02/js基础复习之事件循环EventLoop(一)/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/31/js基础复习之内存管理/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/31/js基础复习之内存管理/">
-    javascript的内存管理</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-31</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/31/js基础复习之内存管理/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz",
+        appKey: "mgOpfzbkHYqU92CV4IDlAUHQ",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author"></a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
 
-<!-- 
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/29/ES6重难点细解/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/8.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/29/ES6重难点细解/">
-    ES6重难点细解</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-29</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/29/ES6重难点细解/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/16/egret游戏开发/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/7.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/16/egret游戏开发/">
-    egret游戏开发</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-16</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/16/egret游戏开发/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/03/WebGL入门(一)/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/5.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/03/WebGL入门(一)/">
-    webGL入门(一)</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-3</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/03/WebGL入门(一)/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/07/01/dart事件循环/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/15.jpeg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/07/01/dart事件循环/">
-    flutter系列之dart事件循环</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-7-1</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/07/01/dart事件循环/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/06/29/dart基础(一)/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/2.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/06/29/dart基础(一)/">
-    flutter系列之dart基础</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-6-29</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/06/29/dart基础(一)/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/06/02/js基础复习之事件循环EventLoop(一)/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/6.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/06/02/js基础复习之事件循环EventLoop(一)/">
-    事件循环EventLoop(一)</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-6-2</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/06/02/js基础复习之事件循环EventLoop(一)/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/05/31/js基础复习之内存管理/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/05/31/js基础复习之内存管理/">
-    javascript的内存管理</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-5-31</div>
-    <p>
-    </p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/05/31/js基础复习之内存管理/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
 
- -->
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>

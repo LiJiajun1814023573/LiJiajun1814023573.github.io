@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-07-03T11:37:48.942Z</updated>
+  <updated>2020-07-29T13:09:46.403Z</updated>
   <id>/</id>
   
   <author>
@@ -17,29 +17,75 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>ES6重难点细解</title>
+    <link href="/2020/07/29/ES6%E9%87%8D%E9%9A%BE%E7%82%B9%E7%BB%86%E8%A7%A3/"/>
+    <id>/2020/07/29/ES6重难点细解/</id>
+    <published>2020-07-29T11:46:57.418Z</published>
+    <updated>2020-07-29T13:09:46.403Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;ES6重难点细解&quot;&gt;&lt;a href=&quot;#ES6重难点细解&quot; class=&quot;headerlink&quot; title=&quot;ES6重难点细解&quot;&gt;&lt;/a&gt;ES6重难点细解&lt;/h1&gt;&lt;h2 id=&quot;解构赋值核心点&quot;&gt;&lt;a href=&quot;#解构赋值核心点&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="javascript" scheme="/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>egret游戏开发</title>
+    <link href="/2020/07/16/egret%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+    <id>/2020/07/16/egret游戏开发/</id>
+    <published>2020-07-16T02:30:04.499Z</published>
+    <updated>2020-07-16T02:36:08.761Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="游戏" scheme="/categories/Web%E5%89%8D%E7%AB%AF/%E6%B8%B8%E6%88%8F/"/>
+    
+    
+      <category term="egret" scheme="/tags/egret/"/>
+    
+  </entry>
+  
+  <entry>
     <title>webGL入门(一)</title>
     <link href="/2020/07/03/WebGL%E5%85%A5%E9%97%A8(%E4%B8%80)/"/>
     <id>/2020/07/03/WebGL入门(一)/</id>
     <published>2020-07-03T00:59:35.637Z</published>
-    <updated>2020-07-03T11:37:48.942Z</updated>
+    <updated>2020-07-16T02:33:29.271Z</updated>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;WebGL介绍&quot;&gt;&lt;a href=&quot;#WebGL介绍&quot; class=&quot;headerlink&quot; title=&quot;WebGL介绍&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;WebGL介绍&lt;/span&gt;&lt;/h1&gt;&lt;h2 id=&quot;产生背景&quot;&gt;&lt;a href=&quot;#产生背景&quot; class=&quot;headerlink&quot; title=&quot;产生背景&quot;&gt;&lt;/a&gt;产生背景&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;WebGL出现之前，浏览器想要实现3d效果必须借助浏览器插件，如Adobe的flash，微软的silverLight等等&lt;/li&gt;
-&lt;li&gt;WebGL 是一组基于 JavaScript 语言的图形规范，浏览器厂商按照这组规范进行实现，为 Web 开发者提供一套3D图形相关的 API&lt;ul&gt;
-&lt;li&gt;这套api，使得开发者能够使用javscript语言与gpu进行通信．而webGL的gpu部分也有对应的编程语言简称GLSL,GLSL程序即为运行在gpu上的着色器程序．着色器程序接受cpu传递过来的数据（webgl使用js），然后对数据进行流水线处理，就可以显示在屏幕上从而实现各种3d应用．&lt;h2 id=&quot;工作方式&quot;&gt;&lt;a href=&quot;#工作方式&quot; class=&quot;headerlink&quot; title=&quot;工作方式&quot;&gt;&lt;/a&gt;工作方式&lt;/h2&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;WebGL的工作方式与流水线相似．从得到数据到渲染到屏幕上，流水线按照既定的步骤从原料到加工，每一步的处理的原材料是上一步加工得到的结果，加工最终形成完整的产品．这种渲染方式我们称之为图形管线/渲染管线&lt;/li&gt;
-&lt;li&gt;WebGL的图元是点，线段，三角形三种图元，而对于其它的webGL程序中出现的图形甚至一些逼真的不规则模型，都是由gpu将点用三角形图元绘制，并且由三角形平面拼接而成得到的．&lt;/li&gt;
-&lt;li&gt;传递给gpu的顶点数据和变换矩阵数据，顶点经过转换之后的坐标是webGL接受的坐标，即gpu渲染管线对这些数据进行流水线作业．&lt;h2 id=&quot;gpu渲染管线作用过程&quot;&gt;&lt;a href=&quot;#gpu渲染管线作用过程&quot; class=&quot;headerlink&quot; title=&quot;gpu渲染管线作用过程&quot;&gt;&lt;/a&gt;gpu渲染管线作用过程&lt;/h2&gt;&lt;/li&gt;
-&lt;li&gt;首先进入顶点着色器阶段，利用 GPU 的并行计算优势对顶点逐个进行坐标变换。&lt;/li&gt;
-&lt;li&gt;然后进入图元装配阶段，将顶点按照图元类型组装成图形。&lt;/li&gt;
-&lt;li&gt;接下来来到光栅化阶段，光栅化阶段将图形用不包含颜色信息的像素填充。&lt;/li&gt;
-&lt;li&gt;在之后进入片元着色器阶段，该阶段为像素着色，并最终显示在屏幕上。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;GLSL&quot;&gt;&lt;a href=&quot;#GLSL&quot; class=&quot;headerlink&quot; title=&quot;GLSL&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;GLSL&lt;/span&gt;&lt;/h1&gt;
+      
+      
+        
+        
+          &lt;h1 id=&quot;WebGL介绍&quot;&gt;&lt;a href=&quot;#WebGL介绍&quot; class=&quot;headerlink&quot; title=&quot;WebGL介绍&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;WebGL介绍&lt;/span&gt;&lt;/h1&gt;&lt;h2 id=&quot;产生背景&quot;&gt;&lt;a
+        
+      
     
     </summary>
     
@@ -129,16 +175,17 @@ flutter: {Symbol(&amp;quot;t&amp;quot;): symbol test} flutter: symbol test flutt
     <link href="/2020/06/02/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AFEventLoop(%E4%B8%80)/"/>
     <id>/2020/06/02/js基础复习之事件循环EventLoop(一)/</id>
     <published>2020-06-02T15:15:42.000Z</published>
-    <updated>2020-07-03T12:44:20.275Z</updated>
+    <updated>2020-07-16T02:33:25.027Z</updated>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;运行时概念&quot;&gt;&lt;a href=&quot;#运行时概念&quot; class=&quot;headerlink&quot; title=&quot;运行时概念&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;运行时概念&lt;/span&gt;&lt;/h1&gt;&lt;h2 id=&quot;栈&quot;&gt;&lt;a href=&quot;#栈&quot; class=&quot;headerlink&quot; title=&quot;栈&quot;&gt;&lt;/a&gt;栈&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;函数调用形成若干帧组成栈&lt;h2 id=&quot;堆&quot;&gt;&lt;a href=&quot;#堆&quot; class=&quot;headerlink&quot; title=&quot;堆&quot;&gt;&lt;/a&gt;堆&lt;/h2&gt;&lt;/li&gt;
-&lt;li&gt;对于js，对象处于堆中(非结构化的内存区域)&lt;h2 id=&quot;队列&quot;&gt;&lt;a href=&quot;#队列&quot; class=&quot;headerlink&quot; title=&quot;队列&quot;&gt;&lt;/a&gt;队列&lt;/h2&gt;&lt;/li&gt;
-&lt;li&gt;js运行时，会包含一个待处理消息的消息队列，而每个消息会有对应回调函数来处理消息．&lt;/li&gt;
-&lt;li&gt;在EventLoop的某个时刻开始，运行时优先处理先进入队列中的消息，然后被处理后移除队列，&lt;span style=&quot;color:red&quot;&gt;作为参数来调用与之关联的函数&lt;/span&gt;，即为该函数创建一个栈帧．此处反映了消息队列与执行栈之间彼此隔离而又互相联系的关系．&lt;/li&gt;
-&lt;li&gt;函数处理会处理直至栈为空，然后事件循环会读取下一个信息(注意理解这一点，对于判断事件循环带来的程序块执行先后顺序问题有很大帮助)&lt;h1 id=&quot;事件循环&quot;&gt;&lt;a href=&quot;#事件循环&quot; class=&quot;headerlink&quot; title=&quot;事件循环&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;事件循环&lt;/span&gt;&lt;/h1&gt;
+      
+      
+        
+        
+          &lt;h1 id=&quot;运行时概念&quot;&gt;&lt;a href=&quot;#运行时概念&quot; class=&quot;headerlink&quot; title=&quot;运行时概念&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;运行时概念&lt;/span&gt;&lt;/h1&gt;&lt;h2 id=&quot;栈&quot;&gt;&lt;a href=&quot;#栈&quot;
+        
+      
     
     </summary>
     
@@ -154,31 +201,17 @@ flutter: {Symbol(&amp;quot;t&amp;quot;): symbol test} flutter: symbol test flutt
     <link href="/2020/05/31/js%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
     <id>/2020/05/31/js基础复习之内存管理/</id>
     <published>2020-05-31T06:47:24.000Z</published>
-    <updated>2020-07-03T11:38:01.950Z</updated>
+    <updated>2020-07-16T02:33:18.115Z</updated>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;内存生命周期&quot;&gt;&lt;a href=&quot;#内存生命周期&quot; class=&quot;headerlink&quot; title=&quot;内存生命周期&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;内存生命周期&lt;/span&gt;&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;分配你所需要的内存&lt;/li&gt;
-&lt;li&gt;使用分配到的内存读写&lt;/li&gt;
-&lt;li&gt;不需要时将其释放\归还&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;javascript的内存分配&quot;&gt;&lt;a href=&quot;#javascript的内存分配&quot; class=&quot;headerlink&quot; title=&quot;javascript的内存分配&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt;javascript的内存分配&lt;/span&gt;&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;值初始化&lt;/li&gt;
-&lt;li&gt;函数调用&lt;/li&gt;
-&lt;li&gt;使用值&lt;ul&gt;
-&lt;li&gt;对分配内存进行读取和写入的操作，读取和写入可能是写入一个变量或者一个对象的属性值，传递函数参数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;不需要时释放&lt;ul&gt;
-&lt;li&gt;垃圾回收器跟踪内存分配和使用，当分配内存不使用时自动释放．近似过程，无法判定&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;垃圾回收&quot;&gt;&lt;a href=&quot;#垃圾回收&quot; class=&quot;headerlink&quot; title=&quot; 垃圾回收&quot;&gt;&lt;/a&gt;&lt;span style=&quot;color:#00e079&quot;&gt; 垃圾回收&lt;/span&gt;&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;引用&lt;ul&gt;
-&lt;li&gt;在内存管理的environment中，一个对象如果有访问另一个对象的权限，就叫一个对象引用另一个对象．对象对它原型的引用(隐式引用)，对它属性的引用(显式引用)．&lt;/li&gt;
-&lt;li&gt;对象包括函数作用域(全局词法作用域)
+      
+      
+        
+        
+          &lt;h1 id=&quot;内存生命周期&quot;&gt;&lt;a href=&quot;#内存生命周期&quot; class=&quot;headerlink&quot; title=&quot;内存生命周期&quot;&gt;&lt;/a&gt;&lt;span
+        
+      
     
     </summary>
     
