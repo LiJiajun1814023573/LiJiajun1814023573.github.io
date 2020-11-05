@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">箭头函数(review系列) | 青山入我怀</title>
+  <title itemprop="name">ES6函数细节与rest运算符(review系列) | 青山入我怀</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -349,11 +349,11 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/4.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/4.jpg">
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/7.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/7.jpg">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      箭头函数(review系列)</h1>
+      ES6函数细节与rest运算符(review系列)</h1>
       <p class="entry-census">
         <span>
           <a href="">
@@ -379,208 +379,131 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="箭头函数-review系列"><a href="#箭头函数-review系列" class="headerlink" title="箭头函数(review系列)"></a>箭头函数(review系列)</h1><h2 id="箭头函数的注意点"><a href="#箭头函数的注意点" class="headerlink" title="箭头函数的注意点"></a>箭头函数的注意点</h2><p>返回对象前加一个(),<br>防止引擎误读成代码块</p>
-<pre><code class="js">(a, b) =&gt; ({a: 3, b: 4}); 
-</code></pre>
-<h2 id="箭头函数的本质"><a href="#箭头函数的本质" class="headerlink" title="箭头函数的本质"></a>箭头函数的本质</h2><p>箭头函数中的this指向的规则不是四大规则之一</p>
-<p>主要区别有以下三点:</p>
-<ol>
-<li>this是由外层函数静态作用域来决定的</li>
-<li><p>=&gt; 不能作为构造函数来使用</p>
-</li>
-<li><p>没有arguments对象，　用rest运算符替代()</p>
-</li>
-<li>yield命令不能生效，　在generator函数中</li>
-</ol>
-<p>依次来看</p>
-<pre><code class="js">function foo(){
-    console.log(this);
-    return (a) =&gt; {
-        console.log(this.a);
-    }
+          <h1 id="ES6函数细节与rest运算符"><a href="#ES6函数细节与rest运算符" class="headerlink" title="ES6函数细节与rest运算符"></a>ES6函数细节与rest运算符</h1><h2 id="形参与实参的关系"><a href="#形参与实参的关系" class="headerlink" title="形参与实参的关系"></a>形参与实参的关系</h2><p>形参默认值会影响到映射关系</p>
+<pre><code class="js">
+var x = 1;
+
+function foo(x = x){
+    // 声明赋值时的rhs查询查询不到x,会报错
+    // Reference Error : x is not undefined
+    console.log(&#39;1&#39;);
 }
 
-var obj1 = {a: 2};
-var obj2 = {a: 3};
-var bar = foo.call(obj1); 
-bar.call(obj2); // 2
+foo()
 </code></pre>
-<pre><code class="js">const person = {
-    eat(){
-        console.log(this);
-    },
-    drink: ()=&gt;{
-        console.log(this);
-    },
+<pre><code class="js">var x = 1;
+
+function foo(x, y = function(){
+    x = 2;
+    cnosole.log(x)
+}){
+    x = 3;
+    y();
+    console.log(x);
 }
-
-person.eat(); //person调用, eat函数执行时指向调用者person
-
-person.drink();
-// window. 
 </code></pre>
-<h2 id="箭头函数使用场景举例"><a href="#箭头函数使用场景举例" class="headerlink" title="箭头函数使用场景举例"></a>箭头函数使用场景举例</h2><pre><code class="html">
-&lt;button id=&quot;button&quot;&gt; &lt;/button&gt;
-</code></pre>
-<p>ES5</p>
-<pre><code class="js">(function(){
-    function Button(){
-        this.button = document.getElementsById(&#39;button&#39;);
-    }
-
-    Button.prototype = {
-        init(){
-            this.bindEvent();
-        },
-        bindEvent(){
-            this.button.addEventListener(&#39;click&#39;,this.clickBtn.bind(this), false);
-            // 不友好
-        },
-        clickBtn(){
-            console.log(&#39;xxx&#39;);
-            console.log(this);
-        }
-    }
-
-    new Button().init();
-})();
-</code></pre>
-<pre><code class="js">(function(){
-    function Button(){
-        this.button = document.getElementsById(&#39;button&#39;);
-    }
-
-    Button.prototype = {
-        init(){
-            this.bindEvent();
-        },
-        bindEvent(){
-            this.button.addEventListener(&#39;click&#39;,(e)=&gt; {this.clickBtn(e)},false;
-            // Change
-        },
-        clickBtn(e){
-            console.log(e)
-            console.log(this);
-        }
-    }
-
-    new Button().init();
-})();
-</code></pre>
-<ul>
-<li><p>不要用bind(this)这种显示改变this指向的丑陋做法。而是用箭头函数。</p>
+<p>调用栈，记录了函数在哪个地方调用的,</p>
+<p>通过控制台Sources查看，设置断点。</p>
+<h1 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h1><h2 id="this指向问题"><a href="#this指向问题" class="headerlink" title="this指向问题"></a>this指向问题</h2><ul>
+<li><p>默认绑定规则(优先值最低)<br>function默认指向window<br>严格模式下，默认指向undefined</p>
 </li>
-<li><p>在执行时其中的this与普通函数不同，它指向与定义的位置有关而与调用方式即函数调用栈无关(请见:You don’tkonw JS)，定义时外层函数作用域中this指向即为箭头函数执行的this指向。</p>
+<li><p>隐式绑定<br>谁调用就指向谁，即看在函数调用栈中的调用情况</p>
 </li>
-<li><p>You don’tkonw JS中还把这种行为与静态作用域类比，从某种角度this除了在箭头函数中有类似静态作用域的行为，其它的地方都类似于动态作用域，即运行时再绑定。</p>
+<li><p>显示绑定<br>call(obj, a, b, c), apply(obj,[a, b , c]), bind(obj, a, b, c);</p>
+</li>
+<li><p>new方式(优先级最高)<br>new的过程就是在最后一步this指向实例化对象</p>
 </li>
 </ul>
-<p><b>箭头函数的嵌套</b></p>
-<pre><code class="js">
-function foo(){
-    return () =&gt; {
-        return () =&gt; {
-            return () =&gt; {
-                console.log(&#39;id&#39;, this.id);
-            }
-        }
-    }
+<p>优先级: new方式 &gt;　显示绑定　&gt;　隐式绑定 &gt; 默认绑定规则</p>
+<h2 id="箭头函数语法"><a href="#箭头函数语法" class="headerlink" title="箭头函数语法"></a>箭头函数语法</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>参数只有一个，函数体只有一条语句，具有返回值</p>
+<pre><code class="js">var f = a =&gt; a;
+| 相当于(但是性质不同，由于一个是函数表达式一个是函数声明，表现也不同如函数声明提升)
+var f = function(a){
+    return a;
+}
+</code></pre>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>参数不是一个时:</p>
+<pre><code class="js">var f = (a, b) =&gt; 5;
+| 相当于(但是性质不同，由于一个是函数表达式一个是函数声明，表现也不同如函数声明提升)
+function f(){
+    return 5;
 }
 
-var f = foo.call({id: 1});
-var f1 = f.call({id: 2})()();
-var f2 = f().call({id: 3})();
-var f3 = f()().call({id: 4});
+</code></pre>
+<h2 id="箭头函数与解构赋值"><a href="#箭头函数与解构赋值" class="headerlink" title="箭头函数与解构赋值"></a>箭头函数与解构赋值</h2><p>解构赋值回顾:</p>
+<p>解构赋值左侧若是对象，如果需要赋值的变量与右侧对象某键名相同，则可对应赋值，从而实现简写。</p>
+<pre><code class="js">const full = ({first, last} = {})=&gt; first + &#39;&#39; + last;
 
+console.log(full({first: 3, last: 5}));
 </code></pre>
-<p>箭头函数中的this是固化的，箭头函数中实际上本身在函数执行期没有自己的this.</p>
-<p>下面代码中的this全部引用的是foo函数的this(可以理解为通过作用域链查找)</p>
-<pre><code class="js">function foo(){
-    console.log(this);
-    return () =&gt; {
-        console.log(this);
-        return () =&gt; {
-            console.log(this);
-            return () =&gt; {
-                console.log(this);
-                console.log(&#39;id&#39;, this.id);
-            }
-        }
-    }
-}
+<h2 id="箭头函数作为函数参数"><a href="#箭头函数作为函数参数" class="headerlink" title="箭头函数作为函数参数"></a>箭头函数作为函数参数</h2><pre><code class="js">var arr = [123321, 124 ,213, 1111];
+
+var arr1 = arr.sort((a,b) =&gt; a - b);
+
+console.log(arr1);
 </code></pre>
-<p>this指向是固化的，函数内部并没有自己的this,只能够通过父级作用域来获取到this,this实际上是闭包导出的this。</p>
-<h2 id="2-不能当做构造函数使用"><a href="#2-不能当做构造函数使用" class="headerlink" title="2.不能当做构造函数使用:"></a>2.不能当做构造函数使用:</h2><p>bind,apply,call.</p>
-<h2 id="箭头函数不存在arguments"><a href="#箭头函数不存在arguments" class="headerlink" title="箭头函数不存在arguments"></a>箭头函数不存在arguments</h2><p>不存在arguments时，其需要RHS查找arguments时只能通过作用域链查找：</p>
-<pre><code class="js">
-var test = () =&gt; {
-    console.log(arguments);
+<p>以上说明箭头函数不是使用function进行声明定义的。</p>
+<h2 id="没有arguments"><a href="#没有arguments" class="headerlink" title="没有arguments"></a>没有arguments</h2><pre><code class="js">var sum = (a, b) =&gt; {
+    console.log(arguments); // 报错
+    return a + b;
 }
 
-test();
+sum(1, 23);
 </code></pre>
-<p>此问题与this指向实质一样的，通过闭包拿到的是父级的arguemnts.<br>这里应该是闭包，原因使用setTimeOut，会将callback放到任务队列中后续会执行,callback定义在foo函数内部(当然这里是箭头函数表达式，不过它依然拥有自己的静态作用域)，在此时foo函数的argumnts被箭头函数作用域链引用了，因此在执行异步任务时，调用callback内部的代码，打印出的arguments实际上是foo在上次执行时产生的AO中的arguments.</p>
-<pre><code class="js">function foo(){
-    console.log(arguments);
-    setTimeout( () =&gt; {
-        console.log(arguments);
-    });
+<h1 id="rest-spread运算符"><a href="#rest-spread运算符" class="headerlink" title="rest/spread运算符"></a>rest/spread运算符</h1><p>用于展开或收集</p>
+<h2 id="收集实参"><a href="#收集实参" class="headerlink" title="收集实参"></a>收集实参</h2><pre><code class="js">var sum = (...args) =&gt; {
+    console.log(args);
+    console.log(args[0] + args[1]);
 }
 
-foo(1, 2, 3, 4, 5, 6, 7)
+sum(1, 2);
 </code></pre>
-<p>反映出来的问题是出来箭头函数中没有arguments(否则会RHS查询到自己函数内部的arguments),同时arguments如同普通变量一样，变量作用域是静态作用域，因此按照作用域链的规则进行查找。</p>
-<h2 id="不适用场景"><a href="#不适用场景" class="headerlink" title="不适用场景"></a>不适用场景</h2><pre><code class="js">function insert(value) {
-    return {
-        into: function(array){
-            return {
-                after: function(afterValue){
-                    array.splice(array.indexof(afterValue) + 1, 0, value);
-                    return array;
-                }
-            }
-        }
-    }
+<h3 id="收集余参"><a href="#收集余参" class="headerlink" title="收集余参"></a>收集余参</h3><pre><code class="js">let fn = (a, b, ...c) =&gt; {
+    console.log(a, b, c);
 }
+
+fm(1, 2, 4, 5, 6, 7);
+// 收集剩余所有参数。
 </code></pre>
-<pre><code class="js">console.log(inset(5).into[1,2,3,4,6,7,8].after(4));
-// [1,2,3,4,5,6,7,8]
+<p>拓展运算符收集必须放在最后一个参数，否则会报错</p>
+<h2 id="展开数组"><a href="#展开数组" class="headerlink" title="展开数组"></a>展开数组</h2><pre><code class="js">function foo(x, y, z){
+    console.log(x ,y ,z); 
+}
+
+foo(...[1, 2, 3]); // 展开数组
 </code></pre>
-<p>简洁，但不推荐，代码不易读</p>
-<pre><code class="js">let insert = (value) =&gt; ({
-    into: (array) =&gt; ({
-        after: (afterValue) =&gt; {
-             array.splice(array.indexof(afterValue) + 1, 0, value);
-             return array;
-        }
+<p>此处也可用apply</p>
+<pre><code class="js">foo.apply(null, [1, 2, 3, 4, 5]);
+</code></pre>
+<h3 id="在其它上下文中拓展？"><a href="#在其它上下文中拓展？" class="headerlink" title="在其它上下文中拓展？"></a>在其它上下文中拓展？</h3><pre><code class="js">let a = [2, 3, 4];
+let b = [1, ...a, 5];
+
+console.log(b) // 展开
+</code></pre>
+<p>从而替代</p>
+<pre><code class="js">console.log([1].concat(a, [5]))
+</code></pre>
+<h1 id="ES6数组排序"><a href="#ES6数组排序" class="headerlink" title="ES6数组排序"></a>ES6数组排序</h1><p>假设：传入参数方式为依次传入。</p>
+<p>ES5实现</p>
+<pre><code class="js">function sortNum(){
+    Array.prototype.slice.call(arguments).sort(function(a, b){
+        return a - b
     })
-})
-</code></pre>
-<pre><code class="js">console.log(inset(5).into[1,2,3,4,6,7,8].after(4));
-</code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="箭头函数适用场景规律"><a href="#箭头函数适用场景规律" class="headerlink" title="箭头函数适用场景规律"></a>箭头函数适用场景规律</h2><ol>
-<li>简单的函数表达式，得出唯一的return的计算值,函数内部没有this的引用时。没有递归，事件绑定，解绑定,考虑用箭头函数的方式重构代码</li>
-</ol>
-<pre><code class="js">
-[12, 3, 1234, 1, 4].sort((a, b)=&gt; a - b);
-</code></pre>
-<ol start="2">
-<li>内层函数表达式，需要调用this, var self = this　或者　bind(this)显示绑定this指向，确保this指向正确时，能考虑用箭头函数替代，因为这两种情况下的this必定与外层函数作用域中的this指向相同，因此避免了复杂的操作方式以改变this</li>
-</ol>
-<ol start="3">
-<li>拓展运算符的应用依赖于封装函数</li>
-</ol>
-<pre><code class="js">var args = Array.prototype.slice.call(arguments);
-</code></pre>
-<pre><code class="js">
-function sortNumber(){
-    return Array.prototype.slice.call(arguments).sort(function(a, b) =&gt; return a - b);
 }
 
-const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
-
+sortNum(12, 431, 24, 1, 4, 135, 2, 35);
 </code></pre>
-<h3 id="不适用场景规律"><a href="#不适用场景规律" class="headerlink" title="不适用场景规律"></a>不适用场景规律</h3><p>　　<br>　　当函数声明，执行语句比较多的情况，还需要用到递归，引用函数名，以及事件绑定，解绑定，避免用箭头表达式</p>
+<p>ES6箭头函数+rest运算符</p>
+<pre><code class="js">const sortNum = (...args) =&gt; args.sort((a, b) =&gt; a - b );
+
+console.log(sortNum(12, 431, 24, 1, 4, 135));
+</code></pre>
+<h2 id="函数length问题"><a href="#函数length问题" class="headerlink" title="函数length问题"></a>函数length问题</h2><pre><code class="js">console.log(function (a){}.length)
+;//1
+
+console.log((function(b,c,d = 0,...a){}).length); // 2
+</code></pre>
+<p>访问的是形参长度<br>length属性只包括实际形参的长度，不包含设置了默认值的形参以及使用rest运算符的参数</p>
 
         </div>
         <!-- .entry-content -->
@@ -612,15 +535,15 @@ const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
           
             <div class="post-nepre half previous">
           
-            <a href="/2020/10/03/块级作用域/" rel="prev">
+            <a href="/2020/11/05/WebGL缓冲区/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg">
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                块级作用域(review系列)</h3>
+                webGL缓冲区</h3>
                 <hr>
               </div>
             </a>
@@ -630,7 +553,7 @@ const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
           
             <div class="post-nepre half next">
           
-            <a href="/2020/08/03/详解事件处理函数中的this/" rel="next">
+            <a href="/2020/10/03/let进阶与const/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg">
               </div>
@@ -638,7 +561,7 @@ const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
               Next Post</span>
               <div class="info">
                 <h3>
-                深究不同情形下事件处理函数中的this</h3>
+                let进阶与const(review系列)</h3>
                 <hr>
               </div>
             </a>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">箭头函数(review系列) | 青山入我怀</title>
+  <title itemprop="name">ES6前置知识(review系列) | 青山入我怀</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -349,11 +349,11 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/4.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/4.jpg">
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/13.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/13.jpg">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      箭头函数(review系列)</h1>
+      ES6前置知识(review系列)</h1>
       <p class="entry-census">
         <span>
           <a href="">
@@ -379,208 +379,75 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="箭头函数-review系列"><a href="#箭头函数-review系列" class="headerlink" title="箭头函数(review系列)"></a>箭头函数(review系列)</h1><h2 id="箭头函数的注意点"><a href="#箭头函数的注意点" class="headerlink" title="箭头函数的注意点"></a>箭头函数的注意点</h2><p>返回对象前加一个(),<br>防止引擎误读成代码块</p>
-<pre><code class="js">(a, b) =&gt; ({a: 3, b: 4}); 
-</code></pre>
-<h2 id="箭头函数的本质"><a href="#箭头函数的本质" class="headerlink" title="箭头函数的本质"></a>箭头函数的本质</h2><p>箭头函数中的this指向的规则不是四大规则之一</p>
-<p>主要区别有以下三点:</p>
-<ol>
-<li>this是由外层函数静态作用域来决定的</li>
-<li><p>=&gt; 不能作为构造函数来使用</p>
+          <h1 id="ES6代码的转译"><a href="#ES6代码的转译" class="headerlink" title="ES6代码的转译"></a>ES6代码的转译</h1><ol>
+<li><p>所需工具</p>
+<pre><code>ES6语法编译成ES5以下语法:
+babel-编译工具(理解为代码块，功能块)
+需要npm安装
+</code></pre></li>
+<li><p>npm安装babel相关工具</p>
+<pre><code>babel-preset  我们指定的规则集为:babel-preset-env
+</code></pre></li>
+<li><p>npm i babel-preset-env –save-dev安装到当前文件夹</p>
 </li>
-<li><p>没有arguments对象，　用rest运算符替代()</p>
-</li>
-<li>yield命令不能生效，　在generator函数中</li>
 </ol>
-<p>依次来看</p>
-<pre><code class="js">function foo(){
-    console.log(this);
-    return (a) =&gt; {
-        console.log(this.a);
-    }
+<ol start="4">
+<li>.babelrc文件(rc是run command运行命令的简写的)的配置<pre><code class="js">{
+ &quot;presets&quot;: [&quot;babel-preset-env&quot;]
 }
-
-var obj1 = {a: 2};
-var obj2 = {a: 3};
-var bar = foo.call(obj1); 
-bar.call(obj2); // 2
 </code></pre>
-<pre><code class="js">const person = {
-    eat(){
-        console.log(this);
-    },
-    drink: ()=&gt;{
-        console.log(this);
-    },
-}
-
-person.eat(); //person调用, eat函数执行时指向调用者person
-
-person.drink();
-// window. 
-</code></pre>
-<h2 id="箭头函数使用场景举例"><a href="#箭头函数使用场景举例" class="headerlink" title="箭头函数使用场景举例"></a>箭头函数使用场景举例</h2><pre><code class="html">
-&lt;button id=&quot;button&quot;&gt; &lt;/button&gt;
-</code></pre>
-<p>ES5</p>
-<pre><code class="js">(function(){
-    function Button(){
-        this.button = document.getElementsById(&#39;button&#39;);
-    }
-
-    Button.prototype = {
-        init(){
-            this.bindEvent();
-        },
-        bindEvent(){
-            this.button.addEventListener(&#39;click&#39;,this.clickBtn.bind(this), false);
-            // 不友好
-        },
-        clickBtn(){
-            console.log(&#39;xxx&#39;);
-            console.log(this);
-        }
-    }
-
-    new Button().init();
-})();
-</code></pre>
-<pre><code class="js">(function(){
-    function Button(){
-        this.button = document.getElementsById(&#39;button&#39;);
-    }
-
-    Button.prototype = {
-        init(){
-            this.bindEvent();
-        },
-        bindEvent(){
-            this.button.addEventListener(&#39;click&#39;,(e)=&gt; {this.clickBtn(e)},false;
-            // Change
-        },
-        clickBtn(e){
-            console.log(e)
-            console.log(this);
-        }
-    }
-
-    new Button().init();
-})();
-</code></pre>
-<ul>
-<li><p>不要用bind(this)这种显示改变this指向的丑陋做法。而是用箭头函数。</p>
 </li>
-<li><p>在执行时其中的this与普通函数不同，它指向与定义的位置有关而与调用方式即函数调用栈无关(请见:You don’tkonw JS)，定义时外层函数作用域中this指向即为箭头函数执行的this指向。</p>
+</ol>
+<ol start="5">
+<li><p>安装babel-cli –save-dev 安装babel脚手架工具(提供一系列命令)</p>
+<pre><code>npm i babel-cli --save-dev
+</code></pre></li>
+<li><p>在”script”中添加</p>
+<pre><code>&quot;build&quot;: &quot;babel app.js -o bundle.js&quot;　
+</code></pre><p>指示babel转义后output到bundle.js</p>
+<pre><code>  &quot;babel src -d lib&quot;
+</code></pre></li>
+<li><p>命令行中使用命令,进行转义</p>
 </li>
-<li><p>You don’tkonw JS中还把这种行为与静态作用域类比，从某种角度this除了在箭头函数中有类似静态作用域的行为，其它的地方都类似于动态作用域，即运行时再绑定。</p>
-</li>
-</ul>
-<p><b>箭头函数的嵌套</b></p>
-<pre><code class="js">
-function foo(){
-    return () =&gt; {
-        return () =&gt; {
-            return () =&gt; {
-                console.log(&#39;id&#39;, this.id);
-            }
-        }
-    }
-}
-
-var f = foo.call({id: 1});
-var f1 = f.call({id: 2})()();
-var f2 = f().call({id: 3})();
-var f3 = f()().call({id: 4});
-
-</code></pre>
-<p>箭头函数中的this是固化的，箭头函数中实际上本身在函数执行期没有自己的this.</p>
-<p>下面代码中的this全部引用的是foo函数的this(可以理解为通过作用域链查找)</p>
-<pre><code class="js">function foo(){
-    console.log(this);
-    return () =&gt; {
-        console.log(this);
-        return () =&gt; {
-            console.log(this);
-            return () =&gt; {
-                console.log(this);
-                console.log(&#39;id&#39;, this.id);
-            }
-        }
-    }
-}
-</code></pre>
-<p>this指向是固化的，函数内部并没有自己的this,只能够通过父级作用域来获取到this,this实际上是闭包导出的this。</p>
-<h2 id="2-不能当做构造函数使用"><a href="#2-不能当做构造函数使用" class="headerlink" title="2.不能当做构造函数使用:"></a>2.不能当做构造函数使用:</h2><p>bind,apply,call.</p>
-<h2 id="箭头函数不存在arguments"><a href="#箭头函数不存在arguments" class="headerlink" title="箭头函数不存在arguments"></a>箭头函数不存在arguments</h2><p>不存在arguments时，其需要RHS查找arguments时只能通过作用域链查找：</p>
-<pre><code class="js">
-var test = () =&gt; {
-    console.log(arguments);
-}
-
-test();
-</code></pre>
-<p>此问题与this指向实质一样的，通过闭包拿到的是父级的arguemnts.<br>这里应该是闭包，原因使用setTimeOut，会将callback放到任务队列中后续会执行,callback定义在foo函数内部(当然这里是箭头函数表达式，不过它依然拥有自己的静态作用域)，在此时foo函数的argumnts被箭头函数作用域链引用了，因此在执行异步任务时，调用callback内部的代码，打印出的arguments实际上是foo在上次执行时产生的AO中的arguments.</p>
-<pre><code class="js">function foo(){
-    console.log(arguments);
-    setTimeout( () =&gt; {
-        console.log(arguments);
-    });
-}
-
-foo(1, 2, 3, 4, 5, 6, 7)
-</code></pre>
-<p>反映出来的问题是出来箭头函数中没有arguments(否则会RHS查询到自己函数内部的arguments),同时arguments如同普通变量一样，变量作用域是静态作用域，因此按照作用域链的规则进行查找。</p>
-<h2 id="不适用场景"><a href="#不适用场景" class="headerlink" title="不适用场景"></a>不适用场景</h2><pre><code class="js">function insert(value) {
-    return {
-        into: function(array){
-            return {
-                after: function(afterValue){
-                    array.splice(array.indexof(afterValue) + 1, 0, value);
-                    return array;
-                }
-            }
-        }
-    }
-}
-</code></pre>
-<pre><code class="js">console.log(inset(5).into[1,2,3,4,6,7,8].after(4));
-// [1,2,3,4,5,6,7,8]
-</code></pre>
-<p>简洁，但不推荐，代码不易读</p>
-<pre><code class="js">let insert = (value) =&gt; ({
-    into: (array) =&gt; ({
-        after: (afterValue) =&gt; {
-             array.splice(array.indexof(afterValue) + 1, 0, value);
-             return array;
-        }
-    })
-})
-</code></pre>
-<pre><code class="js">console.log(inset(5).into[1,2,3,4,6,7,8].after(4));
-</code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="箭头函数适用场景规律"><a href="#箭头函数适用场景规律" class="headerlink" title="箭头函数适用场景规律"></a>箭头函数适用场景规律</h2><ol>
-<li>简单的函数表达式，得出唯一的return的计算值,函数内部没有this的引用时。没有递归，事件绑定，解绑定,考虑用箭头函数的方式重构代码</li>
 </ol>
-<pre><code class="js">
-[12, 3, 1234, 1, 4].sort((a, b)=&gt; a - b);
-</code></pre>
-<ol start="2">
-<li>内层函数表达式，需要调用this, var self = this　或者　bind(this)显示绑定this指向，确保this指向正确时，能考虑用箭头函数替代，因为这两种情况下的this必定与外层函数作用域中的this指向相同，因此避免了复杂的操作方式以改变this</li>
-</ol>
-<ol start="3">
-<li>拓展运算符的应用依赖于封装函数</li>
-</ol>
-<pre><code class="js">var args = Array.prototype.slice.call(arguments);
-</code></pre>
-<pre><code class="js">
-function sortNumber(){
-    return Array.prototype.slice.call(arguments).sort(function(a, b) =&gt; return a - b);
+<pre><code>npm run build
+</code></pre><p>app.js</p>
+<pre><code class="js">var arr = [];
+
+for(let i = 0; i &lt; 10; i++){
+    arr[i] = (() =&gt; {
+        console.log(i);
+    })(i)
 }
-
-const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
-
 </code></pre>
-<h3 id="不适用场景规律"><a href="#不适用场景规律" class="headerlink" title="不适用场景规律"></a>不适用场景规律</h3><p>　　<br>　　当函数声明，执行语句比较多的情况，还需要用到递归，引用函数名，以及事件绑定，解绑定，避免用箭头表达式</p>
+<p>配置执行相应的文件</p>
+<pre><code class="js">&quot;script-name&quot;: &quot;babel-node ./src/app.js&quot;
+</code></pre>
+<p>或者执行也可以直接用node</p>
+<h2 id="babel更多工具"><a href="#babel更多工具" class="headerlink" title="babel更多工具"></a>babel更多工具</h2><p>babel-core：让部分代码转码</p>
+<p>babel-register：利用Require钩子自动编译</p>
+<p>app.js</p>
+<pre><code class="js">var babel = require(&quot;babel-core&quot;);
+</code></pre>
+<p>app.js</p>
+<pre><code class="js">
+require(&quot;babel-register&quot;);
+</code></pre>
+<pre><code class="js">var obj = new Map(); // 新的API没有被转码，通过babel-polyfill插件进行转换成相应浏览器能的代码
+
+console.log(obj);
+</code></pre>
+<p>babel-polyfill:</p>
+<pre><code class="js">require(&quot;babel-polyfill&quot;);
+</code></pre>
+<h2 id="其他方式转义"><a href="#其他方式转义" class="headerlink" title="其他方式转义"></a>其他方式转义</h2><p>也可以通过babel提供的在线的工具，获取浏览器兼容的babel后的js代码</p>
+<p>浏览器当中使用ES6代码<br>在浏览器中引入cdn文件,babel官网提供</p>
+<pre><code class="js">&lt;script type=&quot;text/babel&quot;&gt;
+// 代码
+&lt;/script&gt;
+</code></pre>
+<p>Traceur<br>是谷歌提供的转码工具。<br>在浏览器中使用，同样需要引入script文件</p>
+<p><a href="https://node.green" target="_blank" rel="noopener">https://node.green</a><br>node关于ES6语法支持情况不错<br>因此我们使用node环境测试ES6代码即可</p>
 
         </div>
         <!-- .entry-content -->
@@ -612,15 +479,15 @@ const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
           
             <div class="post-nepre half previous">
           
-            <a href="/2020/10/03/块级作用域/" rel="prev">
+            <a href="/2020/10/03/let进阶与const/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg">
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                块级作用域(review系列)</h3>
+                let进阶与const(review系列)</h3>
                 <hr>
               </div>
             </a>
@@ -630,15 +497,15 @@ const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
           
             <div class="post-nepre half next">
           
-            <a href="/2020/08/03/详解事件处理函数中的this/" rel="next">
+            <a href="/2020/10/03/块级作用域/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                深究不同情形下事件处理函数中的this</h3>
+                块级作用域(review系列)</h3>
                 <hr>
               </div>
             </a>

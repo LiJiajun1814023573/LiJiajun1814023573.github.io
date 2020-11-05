@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2020-10-03T11:29:32.639Z</updated>
+  <updated>2020-11-05T04:14:12.175Z</updated>
   <id>/</id>
   
   <author>
@@ -17,11 +17,176 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>深究不同情形下事件处理函数中的this</title>
+    <title>How browser works 品读(一)</title>
+    <link href="/2020/11/05/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86(%E4%B8%80)/"/>
+    <id>/2020/11/05/浏览器原理(一)/</id>
+    <published>2020-11-05T04:09:35.627Z</published>
+    <updated>2020-11-05T04:14:12.175Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;How-browser-works-品读-一&quot;&gt;&lt;a href=&quot;#How-browser-works-品读-一&quot; class=&quot;headerlink&quot; title=&quot;How browser works 品读(一)&quot;&gt;&lt;/a&gt;How browser works
+        
+      
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="浏览器" scheme="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webGL缓冲区</title>
+    <link href="/2020/11/05/WebGL%E7%BC%93%E5%86%B2%E5%8C%BA/"/>
+    <id>/2020/11/05/WebGL缓冲区/</id>
+    <published>2020-11-05T03:57:11.580Z</published>
+    <updated>2020-11-05T03:59:41.730Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;WebGL缓冲区使用&quot;&gt;&lt;a href=&quot;#WebGL缓冲区使用&quot; class=&quot;headerlink&quot; title=&quot;WebGL缓冲区使用&quot;&gt;&lt;/a&gt;WebGL缓冲区使用&lt;/h1&gt;&lt;h2 id=&quot;为什么需要缓冲区&quot;&gt;&lt;a href=&quot;#为什么需要缓冲区&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="WebGL" scheme="/tags/WebGL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6函数细节与rest运算符(review系列)</title>
+    <link href="/2020/10/03/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%8Erest%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>/2020/10/03/箭头函数与rest运算符/</id>
+    <published>2020-10-03T11:37:23.387Z</published>
+    <updated>2020-10-03T11:39:27.164Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;ES6函数细节与rest运算符&quot;&gt;&lt;a href=&quot;#ES6函数细节与rest运算符&quot; class=&quot;headerlink&quot; title=&quot;ES6函数细节与rest运算符&quot;&gt;&lt;/a&gt;ES6函数细节与rest运算符&lt;/h1&gt;&lt;h2 id=&quot;形参与实参的关系&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="ES6" scheme="/tags/ES6/"/>
+    
+      <category term="javascript" scheme="/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>let进阶与const(review系列)</title>
+    <link href="/2020/10/03/let%E8%BF%9B%E9%98%B6%E4%B8%8Econst/"/>
+    <id>/2020/10/03/let进阶与const/</id>
+    <published>2020-10-03T11:36:14.764Z</published>
+    <updated>2020-10-03T11:36:59.135Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Let&quot;&gt;&lt;a href=&quot;#Let&quot; class=&quot;headerlink&quot; title=&quot;Let&quot;&gt;&lt;/a&gt;Let&lt;/h1&gt;&lt;h2 id=&quot;babel一下&quot;&gt;&lt;a href=&quot;#babel一下&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="ES6" scheme="/tags/ES6/"/>
+    
+      <category term="javascript" scheme="/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6前置知识(review系列)</title>
+    <link href="/2020/10/03/ES6%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/"/>
+    <id>/2020/10/03/ES6前置知识/</id>
+    <published>2020-10-03T11:35:06.233Z</published>
+    <updated>2020-10-03T11:35:59.352Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;ES6代码的转译&quot;&gt;&lt;a href=&quot;#ES6代码的转译&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="ES6" scheme="/tags/ES6/"/>
+    
+      <category term="javascript" scheme="/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>块级作用域(review系列)</title>
+    <link href="/2020/10/03/%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
+    <id>/2020/10/03/块级作用域/</id>
+    <published>2020-10-03T11:31:47.933Z</published>
+    <updated>2020-10-03T11:34:23.402Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;#　块级作用域(review系列)&lt;/p&gt;
+&lt;h2 id=&quot;kiss原则&quot;&gt;&lt;a href=&quot;#kiss原则&quot; class=&quot;headerlink&quot; title=&quot;kiss原则&quot;&gt;&lt;/a&gt;kiss原则&lt;/h2&gt;&lt;p&gt;解决变量污染问题&lt;br&gt;keep it simple
+        
+      
+    
+    </summary>
+    
+      <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="ES6" scheme="/tags/ES6/"/>
+    
+      <category term="javascript" scheme="/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>箭头函数(review系列)</title>
     <link href="/2020/10/03/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
     <id>/2020/10/03/箭头函数/</id>
     <published>2020-10-03T11:28:07.848Z</published>
-    <updated>2020-10-03T11:29:32.639Z</updated>
+    <updated>2020-10-03T11:39:29.336Z</updated>
     
     <summary type="html">
     
@@ -38,9 +203,9 @@
       <category term="Web前端" scheme="/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="javascript" scheme="/tags/javascript/"/>
-    
       <category term="ES6" scheme="/tags/ES6/"/>
+    
+      <category term="javascript" scheme="/tags/javascript/"/>
     
   </entry>
   

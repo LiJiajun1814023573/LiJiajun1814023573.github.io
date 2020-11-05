@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">箭头函数(review系列) | 青山入我怀</title>
+  <title itemprop="name">块级作用域(review系列) | 青山入我怀</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -349,11 +349,11 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/4.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/4.jpg">
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      箭头函数(review系列)</h1>
+      块级作用域(review系列)</h1>
       <p class="entry-census">
         <span>
           <a href="">
@@ -379,208 +379,192 @@
         <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="箭头函数-review系列"><a href="#箭头函数-review系列" class="headerlink" title="箭头函数(review系列)"></a>箭头函数(review系列)</h1><h2 id="箭头函数的注意点"><a href="#箭头函数的注意点" class="headerlink" title="箭头函数的注意点"></a>箭头函数的注意点</h2><p>返回对象前加一个(),<br>防止引擎误读成代码块</p>
-<pre><code class="js">(a, b) =&gt; ({a: 3, b: 4}); 
+          <p>#　块级作用域(review系列)</p>
+<h2 id="kiss原则"><a href="#kiss原则" class="headerlink" title="kiss原则"></a>kiss原则</h2><p>解决变量污染问题<br>keep it simple stupid</p>
+<p>let与块级作用域解决变量污染问题</p>
+<p>形式上的块级作用域</p>
+<pre><code class="js">if(1){
+
+}
 </code></pre>
-<h2 id="箭头函数的本质"><a href="#箭头函数的本质" class="headerlink" title="箭头函数的本质"></a>箭头函数的本质</h2><p>箭头函数中的this指向的规则不是四大规则之一</p>
-<p>主要区别有以下三点:</p>
-<ol>
-<li>this是由外层函数静态作用域来决定的</li>
-<li><p>=&gt; 不能作为构造函数来使用</p>
-</li>
-<li><p>没有arguments对象，　用rest运算符替代()</p>
-</li>
-<li>yield命令不能生效，　在generator函数中</li>
+<pre><code class="js">for(; 1; ){
+    break;
+}
+</code></pre>
+<pre><code class="js">{
+
+}
+</code></pre>
+<h1 id="let-声明"><a href="#let-声明" class="headerlink" title="let 声明"></a>let 声明</h1><pre><code class="js">let a = 1;
+let a = 2;
+</code></pre>
+<p>运行代码</p>
+<pre><code>node app.js
+</code></pre><p>报错，重复定义</p>
+<h2 id="let声明特征"><a href="#let声明特征" class="headerlink" title="let声明特征　"></a>let声明特征　</h2><ol>
+<li>let 声明的变量在同一作用域下不可被重复声明<br><code>`</code>js<br>function test(){<br> let a = 1;<br> var a = 2;<br>}</li>
 </ol>
-<p>依次来看</p>
-<pre><code class="js">function foo(){
-    console.log(this);
-    return (a) =&gt; {
-        console.log(this.a);
-    }
+<pre><code>
+
+```js
+function test(a){
+    let a = 10;
+    console.log(a);
 }
-
-var obj1 = {a: 2};
-var obj2 = {a: 3};
-var bar = foo.call(obj1); 
-bar.call(obj2); // 2
-</code></pre>
-<pre><code class="js">const person = {
-    eat(){
-        console.log(this);
-    },
-    drink: ()=&gt;{
-        console.log(this);
-    },
-}
-
-person.eat(); //person调用, eat函数执行时指向调用者person
-
-person.drink();
-// window. 
-</code></pre>
-<h2 id="箭头函数使用场景举例"><a href="#箭头函数使用场景举例" class="headerlink" title="箭头函数使用场景举例"></a>箭头函数使用场景举例</h2><pre><code class="html">
-&lt;button id=&quot;button&quot;&gt; &lt;/button&gt;
-</code></pre>
-<p>ES5</p>
-<pre><code class="js">(function(){
-    function Button(){
-        this.button = document.getElementsById(&#39;button&#39;);
+</code></pre><p>报错, a已被定义</p>
+<pre><code class="js">function test(a){
+    {
+        let a = 10;
+        console.log(a); // 10
     }
 
-    Button.prototype = {
-        init(){
-            this.bindEvent();
-        },
-        bindEvent(){
-            this.button.addEventListener(&#39;click&#39;,this.clickBtn.bind(this), false);
-            // 不友好
-        },
-        clickBtn(){
-            console.log(&#39;xxx&#39;);
-            console.log(this);
-        }
-    }
-
-    new Button().init();
-})();
-</code></pre>
-<pre><code class="js">(function(){
-    function Button(){
-        this.button = document.getElementsById(&#39;button&#39;);
-    }
-
-    Button.prototype = {
-        init(){
-            this.bindEvent();
-        },
-        bindEvent(){
-            this.button.addEventListener(&#39;click&#39;,(e)=&gt; {this.clickBtn(e)},false;
-            // Change
-        },
-        clickBtn(e){
-            console.log(e)
-            console.log(this);
-        }
-    }
-
-    new Button().init();
-})();
-</code></pre>
-<ul>
-<li><p>不要用bind(this)这种显示改变this指向的丑陋做法。而是用箭头函数。</p>
-</li>
-<li><p>在执行时其中的this与普通函数不同，它指向与定义的位置有关而与调用方式即函数调用栈无关(请见:You don’tkonw JS)，定义时外层函数作用域中this指向即为箭头函数执行的this指向。</p>
-</li>
-<li><p>You don’tkonw JS中还把这种行为与静态作用域类比，从某种角度this除了在箭头函数中有类似静态作用域的行为，其它的地方都类似于动态作用域，即运行时再绑定。</p>
-</li>
-</ul>
-<p><b>箭头函数的嵌套</b></p>
-<pre><code class="js">
-function foo(){
-    return () =&gt; {
-        return () =&gt; {
-            return () =&gt; {
-                console.log(&#39;id&#39;, this.id);
-            }
-        }
-    }
-}
-
-var f = foo.call({id: 1});
-var f1 = f.call({id: 2})()();
-var f2 = f().call({id: 3})();
-var f3 = f()().call({id: 4});
-
-</code></pre>
-<p>箭头函数中的this是固化的，箭头函数中实际上本身在函数执行期没有自己的this.</p>
-<p>下面代码中的this全部引用的是foo函数的this(可以理解为通过作用域链查找)</p>
-<pre><code class="js">function foo(){
-    console.log(this);
-    return () =&gt; {
-        console.log(this);
-        return () =&gt; {
-            console.log(this);
-            return () =&gt; {
-                console.log(this);
-                console.log(&#39;id&#39;, this.id);
-            }
-        }
-    }
+    console.log(a); //undefined
 }
 </code></pre>
-<p>this指向是固化的，函数内部并没有自己的this,只能够通过父级作用域来获取到this,this实际上是闭包导出的this。</p>
-<h2 id="2-不能当做构造函数使用"><a href="#2-不能当做构造函数使用" class="headerlink" title="2.不能当做构造函数使用:"></a>2.不能当做构造函数使用:</h2><p>bind,apply,call.</p>
-<h2 id="箭头函数不存在arguments"><a href="#箭头函数不存在arguments" class="headerlink" title="箭头函数不存在arguments"></a>箭头函数不存在arguments</h2><p>不存在arguments时，其需要RHS查找arguments时只能通过作用域链查找：</p>
-<pre><code class="js">
-var test = () =&gt; {
-    console.log(arguments);
+<ol start="2">
+<li>let 不会声明提升，会产生一个暂时性死区</li>
+</ol>
+<pre><code class="js">console.log(a); // 报错，未被定义
+let a = 10;
+</code></pre>
+<p>函数中也一样</p>
+<pre><code class="js">function test(){
+    console.log(a);
+    let a = 10;
 }
 
 test();
 </code></pre>
-<p>此问题与this指向实质一样的，通过闭包拿到的是父级的arguemnts.<br>这里应该是闭包，原因使用setTimeOut，会将callback放到任务队列中后续会执行,callback定义在foo函数内部(当然这里是箭头函数表达式，不过它依然拥有自己的静态作用域)，在此时foo函数的argumnts被箭头函数作用域链引用了，因此在执行异步任务时，调用callback内部的代码，打印出的arguments实际上是foo在上次执行时产生的AO中的arguments.</p>
-<pre><code class="js">function foo(){
-    console.log(arguments);
-    setTimeout( () =&gt; {
-        console.log(arguments);
-    });
+<p>与var对比</p>
+<pre><code class="js">var a = a;
+console.log(a); // undefined
+
+let b = b;
+console.log(b); //报错
+</code></pre>
+<p>let暂时性死区的影响：</p>
+<pre><code class="js">function test(x = y, y = 2){
+    console.log(x, y);
 }
 
-foo(1, 2, 3, 4, 5, 6, 7)
+test(); // y is not defined
 </code></pre>
-<p>反映出来的问题是出来箭头函数中没有arguments(否则会RHS查询到自己函数内部的arguments),同时arguments如同普通变量一样，变量作用域是静态作用域，因此按照作用域链的规则进行查找。</p>
-<h2 id="不适用场景"><a href="#不适用场景" class="headerlink" title="不适用场景"></a>不适用场景</h2><pre><code class="js">function insert(value) {
-    return {
-        into: function(array){
-            return {
-                after: function(afterValue){
-                    array.splice(array.indexof(afterValue) + 1, 0, value);
-                    return array;
-                }
-            }
-        }
+<pre><code class="js">
+console.log(typeof a); // 报错,是由于let引起的暂时性死区引起的。
+let a;
+</code></pre>
+<ol start="3">
+<li>let 只能在当前的作用域下生效<br><code>`</code>js<br>{<br> let a = 2;<br>}</li>
+</ol>
+<p>console.log(a);</p>
+<pre><code>
+## 隐式let 
+for循环条件中的i属于块级作用域
+```js
+for(let i = 0; i &lt; 10; i++){
+}
+console.log(i); // 报错,i is not defined
+</code></pre><p>var声明的变量不产生块级作用域问题</p>
+<p>情形一:</p>
+<pre><code class="js">var arr = [];
+
+for(var i = 0; i&lt; 10; i++){
+    arr[i] = function(){
+        console.log(i);
+    }
+}
+
+
+for(var i = 0; i &lt; 10; i++){
+    arr[i]();
+}
+
+// 0-9
+</code></pre>
+<p>情形二</p>
+<pre><code class="js">
+for(var i = 0; i &lt; 10; i++){
+    i = &#39;a&#39;;
+    console.log(i); // 只打印一次a 
+}
+
+
+for(var i = 0; i &lt; 10; i++){
+    var i = &#39;a&#39;;
+    console.log(i); // 只打印一次 a
+}
+</code></pre>
+<p>原因是var 不存在块级作用域问题</p>
+<p><b>情形三</b></p>
+<pre><code class="js">for(let i = 0; i &lt; 10; i++){
+    i = &#39;a&#39;;
+    console.log(i); //　依然只打印一次a
+}
+</code></pre>
+<pre><code class="js">for(let i = 0; i &lt; 10; i++){
+    var i = &#39;a&#39;;
+    console.log(i); // 报错,在同一作用域下
+    // 因为var声明的i与let声明的i在同一作用域下，var会有变量提升，而let规定声明的变量不能重复声明,因此会报错
+}
+</code></pre>
+<p><b>情景四</b>:</p>
+<pre><code class="js">for(let i = 0; i &lt; 10; i++){
+    let i = &#39;a&#39;;
+    console.log(i); // 如果在同一块级作用域下，会报错，但是打印出a.
+}
+</code></pre>
+<p>由此说明:</p>
+<p>两个i所在的块级作用域不是同一个块级作用域<br>()作用域是父级作用域。{}内是子级作用域</p>
+<h2 id="babel可能出现问题"><a href="#babel可能出现问题" class="headerlink" title="babel可能出现问题"></a>babel可能出现问题</h2><pre><code class="js">if(1){
+    let a = 1;
+    {
+        let a = 10;
+        console.log(a);
     }
 }
 </code></pre>
-<pre><code class="js">console.log(inset(5).into[1,2,3,4,6,7,8].after(4));
-// [1,2,3,4,5,6,7,8]
-</code></pre>
-<p>简洁，但不推荐，代码不易读</p>
-<pre><code class="js">let insert = (value) =&gt; ({
-    into: (array) =&gt; ({
-        after: (afterValue) =&gt; {
-             array.splice(array.indexof(afterValue) + 1, 0, value);
-             return array;
-        }
-    })
-})
-</code></pre>
-<pre><code class="js">console.log(inset(5).into[1,2,3,4,6,7,8].after(4));
-</code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="箭头函数适用场景规律"><a href="#箭头函数适用场景规律" class="headerlink" title="箭头函数适用场景规律"></a>箭头函数适用场景规律</h2><ol>
-<li>简单的函数表达式，得出唯一的return的计算值,函数内部没有this的引用时。没有递归，事件绑定，解绑定,考虑用箭头函数的方式重构代码</li>
-</ol>
-<pre><code class="js">
-[12, 3, 1234, 1, 4].sort((a, b)=&gt; a - b);
-</code></pre>
-<ol start="2">
-<li>内层函数表达式，需要调用this, var self = this　或者　bind(this)显示绑定this指向，确保this指向正确时，能考虑用箭头函数替代，因为这两种情况下的this必定与外层函数作用域中的this指向相同，因此避免了复杂的操作方式以改变this</li>
-</ol>
-<ol start="3">
-<li>拓展运算符的应用依赖于封装函数</li>
-</ol>
-<pre><code class="js">var args = Array.prototype.slice.call(arguments);
-</code></pre>
-<pre><code class="js">
-function sortNumber(){
-    return Array.prototype.slice.call(arguments).sort(function(a, b) =&gt; return a - b);
+<p>let 本质上就是为了js增加块级作用域而出现的</p>
+<p>babel后可以看到babel后的代码，转码之后发现以上代码处理为</p>
+<pre><code class="js">if(1){
+    var a = 1;
+    {
+        var _a = 10;
+        console.log(_a);
+    }
 }
-
-const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
-
 </code></pre>
-<h3 id="不适用场景规律"><a href="#不适用场景规律" class="headerlink" title="不适用场景规律"></a>不适用场景规律</h3><p>　　<br>　　当函数声明，执行语句比较多的情况，还需要用到递归，引用函数名，以及事件绑定，解绑定，避免用箭头表达式</p>
+<p>有时候会无法成功转义</p>
+<pre><code class="js">for(let i = 0; i &lt; 10; i++){
+    let i = &#39;a&#39;;
+    console.log(i);
+}
+</code></pre>
+<p>本应该出现10个a,但　是转义后却仍然是一个a。</p>
+<h2 id="块级作用域与函数"><a href="#块级作用域与函数" class="headerlink" title="块级作用域与函数"></a>块级作用域与函数</h2><p>函数只能在函数或顶层作用域中声明.</p>
+<p>ES5认为在{}块级作用域声明函数不合法</p>
+<p>ES6做出妥协:<br>如下都可以声明函数</p>
+<pre><code class="js">if(i){
+    function test(){}
+};
+</code></pre>
+<pre><code class="js">try{
+    function test(){}
+} catch(e) {
+    function test(){}
+}
+</code></pre>
+<p>但是不推荐在块级作用域中直接进行函数声明,<br>而推荐使用函数表达式来完成目的</p>
+<h2 id="块级作用域设置返回值无意义"><a href="#块级作用域设置返回值无意义" class="headerlink" title="块级作用域设置返回值无意义"></a>块级作用域设置返回值无意义</h2><pre><code class="js">var a = for(; i ;){
+    return 
+}
+</code></pre>
+<p>草案:</p>
+<pre><code class="js">do{
+    return
+}
+</code></pre>
+<h2 id="块级作用域与函数立即调用"><a href="#块级作用域与函数立即调用" class="headerlink" title="块级作用域与函数立即调用"></a>块级作用域与函数立即调用</h2><p>块级作用域是否与函数的立即调用相同?</p>
+<p>不是，只能相互模拟，但也存在问题，比如函数的立即调用具有返回值，并且在外部可以接收。块级作用域是在外部无法访问作用域中VO中存储的变量。</p>
 
         </div>
         <!-- .entry-content -->
@@ -612,15 +596,15 @@ const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
           
             <div class="post-nepre half previous">
           
-            <a href="/2020/10/03/块级作用域/" rel="prev">
+            <a href="/2020/10/03/ES6前置知识/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/9.jpg">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/13.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/13.jpg">
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                块级作用域(review系列)</h3>
+                ES6前置知识(review系列)</h3>
                 <hr>
               </div>
             </a>
@@ -630,15 +614,15 @@ const sortNumber = (...numbers) =&gt; numbers.sort((a,b) =&gt; a - b);
           
             <div class="post-nepre half next">
           
-            <a href="/2020/08/03/详解事件处理函数中的this/" rel="next">
+            <a href="/2020/10/03/箭头函数/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/3.jpg">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/4.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/LiJiajun1814023573/cdn@1.3/img/4.jpg">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                深究不同情形下事件处理函数中的this</h3>
+                箭头函数(review系列)</h3>
                 <hr>
               </div>
             </a>
